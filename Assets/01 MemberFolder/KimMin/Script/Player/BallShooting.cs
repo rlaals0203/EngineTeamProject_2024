@@ -3,14 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestShoot : MonoBehaviour
+public class BallShooting : MonoBehaviour
 {
-    [SerializeField] private float _power;
+    public event Action OnShoot;
+
+    [SerializeField] private float _shootPower;
 
     private Rigidbody _rigid;
     private Transform _cam;
     private Transform _player;
-    public event Action OnShoot;
 
     private void Awake()
     {
@@ -31,12 +32,9 @@ public class TestShoot : MonoBehaviour
     {
         Vector3 fixedPos = new Vector3
             (_cam.position.x, _player.position.y, _cam.position.z);
-
         Vector3 shootDir = (_player.position - fixedPos).normalized;
 
-        _rigid.AddForce(shootDir * _power, ForceMode.Force);
-
-        Debug.Log(shootDir);
+        _rigid.AddForce(shootDir * _shootPower, ForceMode.Force);
         OnShoot?.Invoke();
     }
 }
