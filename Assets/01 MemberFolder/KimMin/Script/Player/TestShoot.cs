@@ -41,9 +41,4 @@ public class TestShoot : MonoBehaviour
         Debug.Log(shootDir);
         OnShoot?.Invoke();
     }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawLine(_player.position, shootDir);
-    }
 }
