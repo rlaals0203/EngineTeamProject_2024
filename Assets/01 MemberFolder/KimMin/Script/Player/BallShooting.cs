@@ -22,7 +22,18 @@ public class BallShooting : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
+        {
+            Releasing();
+        }
+    }
+
+    private void Releasing()
+    {
+        float xPos = Input.GetAxis("Mouse X");
+        Debug.Log(xPos);
+
+        if (Input.GetMouseButtonUp(0))
         {
             Shooting();
         }
