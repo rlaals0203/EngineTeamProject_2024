@@ -4,6 +4,11 @@ using UnityEngine;
 using System;
 using System.Linq;
 
+public enum StateEnum
+{
+    Idle, Move, Release, Gole
+}
+
 public class Player : PlayerSetting
 {
     private Dictionary<Type, IPlayerComponent> _components;
@@ -12,8 +17,11 @@ public class Player : PlayerSetting
     private void Awake()
     {
         stateMachine = new StateMachine();
-        stateMachine.AddState(StateEnum.Idle, new IdleState());
-        stateMachine.AddState(StateEnum.Move, new MoveState());
+
+        stateMachine.AddState(StateEnum.Idle, new IdleState(this, stateMachine));
+        stateMachine.AddState(StateEnum.Move, new MoveState(this, stateMachine));
+
+        stateMachine.InitializeState(StateEnum.Idle, this);
 
         _components = new Dictionary<Type, IPlayerComponent>();
 

@@ -5,11 +5,9 @@ using UnityEngine;
 
 public class BallShooting : MonoBehaviour, IPlayerComponent
 {
-    private Player _player;
     public event Action OnShoot;
 
-    [SerializeField] private float _shootPower;
-
+    private Player _player;
     private Rigidbody _rigid;
     private Transform _cam;
 
@@ -30,12 +28,13 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
     public void Initialize(Player player)
     {
         _player = player;
+        Debug.Log(_player);
     }
 
     private void Releasing()
     {
         float xPos = Input.GetAxis("Mouse X");
-        Debug.Log(xPos);
+        //Debug.Log(xPos);
 
         if (Input.GetMouseButtonUp(0))
         {
@@ -51,7 +50,7 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
             (_cam.position.x, _player.transform.position.y, _cam.position.z);
         Vector3 shootDir = (_player.transform.position - fixedPos).normalized;
 
-        _rigid.AddForce(shootDir * _shootPower, ForceMode.Force);
+        _rigid.AddForce(shootDir * _player.shootPower, ForceMode.Force);
         OnShoot?.Invoke();
     }
 

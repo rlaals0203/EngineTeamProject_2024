@@ -2,24 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum StateEnum
+public abstract class State
 {
-    Idle, Move, Release, Gole
-}
+    protected Player _player;
+    protected StateMachine _stateMachine;
 
-public abstract class State : MonoBehaviour, IPlayerComponent
-{
-    public Player Player { get; private set; }
-
-    public void Initialize(Player player)
+    public State(Player player, StateMachine stateMachine)
     {
-        Player = player;
+        _player = player;
+        _stateMachine = stateMachine;
     }
+
+    public Player Player { get; private set; }
 
     public virtual void EnterState() { }
 
     public virtual void UpdateState() { }
 
     public virtual void ExitState() { }
-
 }
