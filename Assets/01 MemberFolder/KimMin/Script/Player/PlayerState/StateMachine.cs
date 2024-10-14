@@ -5,7 +5,7 @@ using UnityEngine;
 public class StateMachine : MonoBehaviour, IPlayerComponent
 {
     private Player _player;
-    public State CurrentState { get; private set; }
+    [field:SerializeField] public State CurrentState { get; private set; }
 
     public Dictionary<StateEnum, State> stateDic = new Dictionary<StateEnum, State>();
 
