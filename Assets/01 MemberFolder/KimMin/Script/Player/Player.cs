@@ -7,9 +7,14 @@ using System.Linq;
 public class Player : PlayerSetting
 {
     private Dictionary<Type, IPlayerComponent> _components;
+    public StateMachine stateMachine;
 
     private void Awake()
     {
+        stateMachine = new StateMachine();
+        stateMachine.AddState(StateEnum.Idle, new IdleState());
+        stateMachine.AddState(StateEnum.Move, new MoveState());
+
         _components = new Dictionary<Type, IPlayerComponent>();
 
         GetComponentsInChildren<IPlayerComponent>().ToList()
