@@ -13,8 +13,6 @@ public abstract class State
         _stateMachine = stateMachine;
     }
 
-    public Player Player { get; private set; }
-
     public virtual void EnterState() { }
 
     public virtual void UpdateState() { }

@@ -10,14 +10,14 @@ public class MoveState : State
 
     public override void EnterState()
     {
-        Player.IsIdle = false;
+        _player.IsIdle = false;
     }
 
     public override void UpdateState()
     {
-        if (Player.RigidCompo.velocity == Vector3.zero)
+        if (_player.RigidCompo.velocity == Vector3.zero)
         {
-            Player.stateMachine.ChangeState(StateEnum.Idle);
+            _stateMachine.ChangeState(StateEnum.Idle);
         }
     }
 }

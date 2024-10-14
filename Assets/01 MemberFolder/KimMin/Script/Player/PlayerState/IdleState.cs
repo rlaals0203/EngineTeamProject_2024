@@ -10,14 +10,16 @@ public class IdleState : State
 
     public override void EnterState()
     {
-        Player.IsIdle = true;
+        _player.IsIdle = true;
+        _player.IsShot = false;
+        Debug.Log("พฦภฬต้");
     }
 
     public override void UpdateState()
     {
-        if (Player.RigidCompo.velocity != Vector3.zero)
+        if (_player.RigidCompo.velocity != Vector3.zero)
         {
-            Player.stateMachine.ChangeState(StateEnum.Move);
+            _stateMachine.ChangeState(StateEnum.Move);
         }
     }
 }

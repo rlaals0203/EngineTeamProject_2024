@@ -14,8 +14,9 @@ public class Player : PlayerSetting
     private Dictionary<Type, IPlayerComponent> _components;
     public StateMachine stateMachine;
 
-    private void Awake()
+    public override void Awake()
     {
+        base.Awake();
         stateMachine = new StateMachine();
 
         stateMachine.AddState(StateEnum.Idle, new IdleState(this, stateMachine));
@@ -29,6 +30,11 @@ public class Player : PlayerSetting
             .ForEach(x => _components.Add(x.GetType(), x));
 
         _components.Values.ToList().ForEach(compo => compo.Initialize(this));
+    }
+
+    private void Update()
+    {
+        stateMachine.CurrentState.UpdateState();
     }
 
     public T GetCompo<T>() where T : class

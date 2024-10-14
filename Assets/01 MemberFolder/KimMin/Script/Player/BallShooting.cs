@@ -17,19 +17,19 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
         _rigid = GetComponent<Rigidbody>();
     }
 
-    private void Update()
-    {
-        if (Input.GetMouseButton(0))
-        {
-            Releasing();
-        }
-    }
-
     public void Initialize(Player player)
     {
         _player = player;
-        Debug.Log(_player);
     }
+
+    private void FixedUpdate()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Shooting();
+        }
+    }
+
 
     private void Releasing()
     {
@@ -51,6 +51,7 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
         Vector3 shootDir = (_player.transform.position - fixedPos).normalized;
 
         _rigid.AddForce(shootDir * _player.shootPower, ForceMode.Force);
+        _player.IsShot = true;
         OnShoot?.Invoke();
     }
 
