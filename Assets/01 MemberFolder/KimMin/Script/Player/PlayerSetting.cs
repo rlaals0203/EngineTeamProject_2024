@@ -7,11 +7,11 @@ public class PlayerSetting : MonoBehaviour
     [Header("Setting")]
     public float shootPower = 500f;
     public float mass = 0.1f;
-    public float drag = 1f;
     public float decelerationPoint = 1f;
     public float stopPoint = 0.05f;
 
-    public Rigidbody RigidCompo;
+    public Rigidbody RigidCompo { get; protected set; }
+    public PhysicMaterial PhysicsMatCompo { get; protected set; }
 
     public bool IsIdle { get; set; } = false;
     public bool IsShot { get; set; } = false;
@@ -19,7 +19,7 @@ public class PlayerSetting : MonoBehaviour
     public virtual void Awake()
     {
         RigidCompo = GetComponent<Rigidbody>();
+        PhysicsMatCompo = GetComponent<CapsuleCollider>().GetComponent<PhysicMaterial>();
         RigidCompo.mass = mass;
-        RigidCompo.drag = drag;
     }
 }

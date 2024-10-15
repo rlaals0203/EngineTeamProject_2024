@@ -6,8 +6,7 @@ using UnityEngine;
 public class BallPhysics : MonoBehaviour, IPlayerComponent
 {
     private Player _player;
-    private bool _isSaved;
-    private Vector3 _startV;
+    private bool isDecelerate = false;
 
     public void Initialize(Player player)
     {
@@ -16,33 +15,26 @@ public class BallPhysics : MonoBehaviour, IPlayerComponent
 
     private void FixedUpdate()
     {
-        if (!_isSaved)
-        {
-            _startV = _player.RigidCompo.velocity;
-            _isSaved = true;
-        }
-
         FixedDeceleration();
     }
 
     private void FixedDeceleration()
     {
+        if (!_player.IsShot) return;
+
         Vector3 velocity = _player.RigidCompo.velocity;
         float currentVelo = velocity.x + velocity.y;
 
-        if (currentVelo <= _player.decelerationPoint && _player.IsShot)
+        if (currentVelo <= _player.decelerationPoint && !isDecelerate)
         {
-            _player.RigidCompo.drag = 2f;
+            _player.PhysicsMatCompo.dynamicFriction = 2f;
+            isDecelerate = true;
         }
-        else if(currentVelo <= _player.stopPoint)
+        else if(currentVelo <= _player.stopPoint && isDecelerate)
         {
             _player.RigidCompo.velocity = Vector3.zero;
-            _player.RigidCompo.drag = _player.drag;
-        }
-
-        if (_player.IsIdle)
-        {
-            _isSaved = false;
+            _player.PhysicsMatCompo.dynamicFriction = 0;
+            isDecelerate = false;
         }
     }
 }
