@@ -12,7 +12,6 @@ public class IdleState : State
     {
         _player.IsIdle = true;
         _player.IsShot = false;
-        Debug.Log("พฦภฬต้");
     }
 
     public override void UpdateState()

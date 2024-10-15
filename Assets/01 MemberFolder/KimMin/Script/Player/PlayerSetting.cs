@@ -7,6 +7,7 @@ public class PlayerSetting : MonoBehaviour
     [Header("Setting")]
     public float shootPower = 500f;
     public float mass = 0.1f;
+    public float drag = 0.1f;
     public float decelerationPoint = 1f;
     public float stopPoint = 0.05f;
 
@@ -19,7 +20,7 @@ public class PlayerSetting : MonoBehaviour
     public virtual void Awake()
     {
         RigidCompo = GetComponent<Rigidbody>();
-        PhysicsMatCompo = GetComponent<CapsuleCollider>().GetComponent<PhysicMaterial>();
+        PhysicsMatCompo = GetComponent<CapsuleCollider>().material;
         RigidCompo.mass = mass;
     }
 }
