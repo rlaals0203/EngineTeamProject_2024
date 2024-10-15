@@ -23,21 +23,19 @@ public class BallPhysics : MonoBehaviour, IPlayerComponent
     {
         if (!_player.IsShot || _player.IsIdle) return;
 
-        Vector3 velocity = _player.RigidCompo.velocity;
-        float currentVelo = Mathf.Abs(velocity.x) + Mathf.Abs(velocity.y);
+        float speed = _player.RigidCompo.velocity.magnitude;
 
-        Debug.Log(currentVelo);
-
-        if (currentVelo <= _player.decelerationPoint && !isDecelerate)
+        if (speed <= _player.decelerationPoint && !isDecelerate)
         {
             Debug.Log("급감");
-            _player.RigidCompo.drag = 2f;
+            _player.RigidCompo.drag = 1f;
             isDecelerate = true;
         }
-        else if(currentVelo <= _player.stopPoint && !isStop)
+        else if(speed <= _player.stopPoint && !isStop)
         {
             Debug.Log("정지");
             _player.RigidCompo.velocity = Vector3.zero;
+            _player.RigidCompo.angularVelocity = Vector3.zero;
             _player.RigidCompo.drag = _player.drag;
             isStop = true;
         }
