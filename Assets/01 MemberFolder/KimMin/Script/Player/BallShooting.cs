@@ -8,14 +8,14 @@ using UnityEngine.UI;
 public class BallShooting : MonoBehaviour, IPlayerComponent
 {
     public event Action OnShoot;
-
     private Player _player;
     private Transform _cam;
     private bool _isHold;
+    private float _power;
 
-    [SerializeField] private float _power;
+    [SerializeField] private float _powerSensivity = 10f;
     [SerializeField] private GameObject _shootSlider;
-    [SerializeField] private Image _fill;
+    [SerializeField] private GameObject _fill;
 
     private void Awake()
     {
@@ -31,6 +31,8 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
     {
         if (_isHold)
         {
+            if (_player.IsShot) return;
+
             Release();
         }
 
@@ -44,21 +46,19 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
 
     private void Release()
     {
-        if (_player.IsShot) return;
-
-        if (!_shootSlider.gameObject.activeInHierarchy)
-            _shootSlider.gameObject.SetActive(true);
-
         Mouse mouse = Mouse.current;
         float delta = Mathf.Round(mouse.delta.value.normalized.y);
 
-        _power += delta;
-        _fill.fillAmount = _power / 100;
+        _power += delta * _powerSensivity * Time.deltaTime;
+        _power = Mathf.Clamp(_power, 0, 100);
+        _fill.transform.localScale = new Vector3(_power / 100, _fill.transform.localScale.y);
+
+        _shootSlider.SetActive(true);
 
         if(Mouse.current.leftButton.wasReleasedThisFrame)
         {
             Shooting();
-            _shootSlider.gameObject.SetActive(false);
+            _shootSlider.SetActive(false);
         }
         else if(Keyboard.current.eKey.wasPressedThisFrame)
         {
@@ -68,6 +68,9 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
 
     private void CancelShooting()
     {
+        _shootSlider.gameObject.SetActive(false);
+        _player.IsShot = true;
+        _isHold = false;
         _power = 0;
     }
 

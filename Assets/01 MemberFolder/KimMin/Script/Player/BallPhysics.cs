@@ -16,24 +16,21 @@ public class BallPhysics : MonoBehaviour, IPlayerComponent
 
     private void Update()
     {
-        FixedDeceleration();
+        if (_player.IsShot)
+            FixedDeceleration();
     }
 
     private void FixedDeceleration()
     {
-        if (!_player.IsShot) return;
-
         float speed = _player.RigidCompo.velocity.magnitude;
 
         if (speed <= _player.decelerationPoint && !isDecelerate)
         {
-            Debug.Log("급감");
             _player.RigidCompo.drag = 1f;
             isDecelerate = true;
         }
         else if(speed <= _player.stopPoint && !isStop)
         {
-            Debug.Log("정지");
             _player.RigidCompo.velocity = Vector3.zero;
             _player.RigidCompo.angularVelocity = Vector3.zero;
             _player.RigidCompo.drag = _player.drag;
@@ -42,7 +39,6 @@ public class BallPhysics : MonoBehaviour, IPlayerComponent
 
         if (isStop && isDecelerate)
         {
-            Debug.Log("초기화");
             isDecelerate = false;
             isStop = false;
         }
