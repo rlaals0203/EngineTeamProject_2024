@@ -21,7 +21,7 @@ public class BallPhysics : MonoBehaviour, IPlayerComponent
 
     private void FixedDeceleration()
     {
-        if (!_player.IsShot || _player.IsIdle) return;
+        if (!_player.IsShot) return;
 
         float speed = _player.RigidCompo.velocity.magnitude;
 
