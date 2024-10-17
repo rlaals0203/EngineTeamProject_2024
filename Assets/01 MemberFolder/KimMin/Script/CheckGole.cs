@@ -14,7 +14,10 @@ public enum GoleEnum
     BOGEY = 1,
     DOUBLE_BOGEY = 2,
     TRIPLE_BOGEY = 3,
-    QUAD_BOGEY = 4
+    QUADRUPLE_BOGEY = 4,
+    QUINTUPLE_BOGEY = 5,
+    SEXTUPLE_BOGEY = 6,
+    SEPTUPLE_BOGEY = 7
 }
 
 public class CheckGole : MonoBehaviour, IPlayerComponent
@@ -24,32 +27,24 @@ public class CheckGole : MonoBehaviour, IPlayerComponent
     private Player _player;
     private BallShooting _ballShoot;
     private string _strokeName;
-    private int _stroke;
     private int _par = 5;
 
     public void Initialize(Player player)
     {
         _player = player;
         _ballShoot = _player.GetCompo<BallShooting>();
-
-        _ballShoot.OnShootEvent += HandleBallShoot;
-    }
-
-    private void HandleBallShoot()
-    {
-        _stroke++;
     }
 
     private void OnGole()
     {
-        if (_stroke <= 1)
+        if (_ballShoot.stroke <= 1)
         {
             _strokeName = "HOLE_IN_ONE";
             Debug.Log(_strokeName);
             return;
         }
 
-        int par = _stroke - _par;
+        int par = _ballShoot.stroke - _par;
         GoleEnum gole = (GoleEnum)par;
         _strokeName = gole.ToString();
 

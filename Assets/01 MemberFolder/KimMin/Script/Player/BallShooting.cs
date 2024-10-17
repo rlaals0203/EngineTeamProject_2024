@@ -9,8 +9,9 @@ using UnityEngine.UI;
 public class BallShooting : MonoBehaviour, IPlayerComponent
 {
     public event Action OnShootEvent;
-    [Range(0f, 100f)]
-    public float shootPower;
+
+    [Range(0, 100f)] public float shootPower;
+    public int stroke = 0;
 
     private Player _player;
     private Transform _cam;
@@ -47,9 +48,9 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
     {
         Mouse mouse = Mouse.current;
         float delta = Mathf.Round(mouse.delta.value.normalized.y);
-        delta = Mathf.Clamp(delta, 0, 100);
-        shootPower += delta * _powerSensivity * Time.deltaTime; // 정규화 한 마우스 y축 이동값을 값을 넣어줌
-
+        shootPower += delta * _powerSensivity * Time.deltaTime;
+        shootPower = Mathf.Clamp(shootPower, 0, 100);
+        // 정규화 한 마우스 y축 이동값을 값을 넣어줌
         _player.IsRelease = true;
 
         if (Mouse.current.leftButton.wasReleasedThisFrame)
@@ -71,8 +72,6 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
 
     private void Shooting() //카메라가 플레이어 바라보는 방향으로 슛
     {
-        _player.IsShot = true;
-
         Vector3 fixedPos = new Vector3
             (_cam.position.x, _player.transform.position.y, _cam.position.z);
         //카메라 y를 플레이어 y로 변환해 계산해줌
@@ -82,8 +81,11 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
         _player.RigidCompo.AddForce(shootDir * shootPower * 10, ForceMode.Force);
 
         shootPower = 0;
+
         _isHold = false;
         _player.IsRelease = false;
+        _player.IsShot = true;
+        stroke++;
         OnShootEvent?.Invoke();
     }
 }
