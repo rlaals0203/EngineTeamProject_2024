@@ -1,21 +1,20 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class BallShooting : MonoBehaviour, IPlayerComponent
 {
-    public event Action OnShoot;
+    public float shootPower;
     private Player _player;
     private Transform _cam;
     private bool _isHold;
-    private float _power;
 
     [SerializeField] private float _powerSensivity = 10f;
-    [SerializeField] private GameObject _shootSlider;
-    [SerializeField] private GameObject _fill;
 
     private void Awake()
     {
@@ -29,36 +28,32 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
 
     private void Update()
     {
-        if (_isHold)
+        if(_isHold)
         {
             if (_player.IsShot) return;
 
             Release();
         }
 
-
-        if (Input.GetMouseButton(0))
+        if (Mouse.current.leftButton.isPressed)
         {
             _isHold = true;
         }
-        else _isHold = false;
     }
 
-    private void Release()
+    private void Release() //꾹 누르고 있을때
     {
         Mouse mouse = Mouse.current;
         float delta = Mathf.Round(mouse.delta.value.normalized.y);
 
-        _power += delta * _powerSensivity * Time.deltaTime;
-        _power = Mathf.Clamp(_power, 0, 100);
-        _fill.transform.localScale = new Vector3(_power / 100, _fill.transform.localScale.y);
+        shootPower += delta * _powerSensivity * Time.deltaTime; // 정규화 한 마우스 y축 이동값을 값을 넣어줌
+        shootPower = Mathf.Clamp(shootPower, 0, 100);
 
-        _shootSlider.SetActive(true);
+        _player.IsRelease = true;
 
-        if(Mouse.current.leftButton.wasReleasedThisFrame)
+        if (Mouse.current.leftButton.wasReleasedThisFrame)
         {
             Shooting();
-            _shootSlider.SetActive(false);
         }
         else if(Keyboard.current.eKey.wasPressedThisFrame)
         {
@@ -66,25 +61,27 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
         }
     }
 
-    private void CancelShooting()
+    private void CancelShooting() //슛 취소
     {
-        _shootSlider.gameObject.SetActive(false);
-        _player.IsShot = true;
+        shootPower = 0;
+        _player.IsRelease = false;
         _isHold = false;
-        _power = 0;
     }
 
-    private void Shooting()
+    private void Shooting() //카메라가 플레이어 바라보는 방향으로 슛
     {
+        _player.IsShot = true;
+
         Vector3 fixedPos = new Vector3
             (_cam.position.x, _player.transform.position.y, _cam.position.z);
+        //카메라 y를 플레이어 y로 변환해 계산해줌
 
-        Vector3 shootDir = (_player.transform.position - fixedPos).normalized;
+        Vector3 shootDir =(_player.transform.position - fixedPos).normalized;
 
-        _player.RigidCompo.AddForce(shootDir * _power * 10, ForceMode.Force);
-        _player.IsShot = true;
-        _power = 0;
-        OnShoot?.Invoke();
+        _player.RigidCompo.AddForce(shootDir * shootPower * 10, ForceMode.Force);
+
+        shootPower = 0;
+        _isHold = false;
+        _player.IsRelease = false;
     }
-
 }

@@ -31,10 +31,7 @@ public class BallPhysics : MonoBehaviour, IPlayerComponent
         }
         else if(speed <= _player.stopPoint && !isStop)
         {
-            _player.RigidCompo.velocity = Vector3.zero;
-            _player.RigidCompo.angularVelocity = Vector3.zero;
-            _player.RigidCompo.drag = _player.drag;
-            isStop = true;
+            StopBall();
         }
 
         if (isStop && isDecelerate)
@@ -42,5 +39,13 @@ public class BallPhysics : MonoBehaviour, IPlayerComponent
             isDecelerate = false;
             isStop = false;
         }
+    }
+
+    private void StopBall()
+    {
+        _player.RigidCompo.velocity = Vector3.zero;
+        _player.RigidCompo.angularVelocity = Vector3.zero;
+        _player.RigidCompo.drag = _player.drag;
+        isStop = true;
     }
 }
