@@ -5,10 +5,9 @@ using UnityEngine;
 public class PlayerSetting : MonoBehaviour
 {
     [Header("Setting")]
-    public float shootPower = 500f;
     public float mass = 0.1f;
     public float drag = 0.1f;
-    public float decelerationPoint = 1f;
+    public float decelerationPoint = 1.0f;
     public float stopPoint = 0.05f;
 
     public Rigidbody RigidCompo { get; protected set; }

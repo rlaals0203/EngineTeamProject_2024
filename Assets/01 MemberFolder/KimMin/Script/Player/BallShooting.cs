@@ -5,11 +5,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class BallShooting : MonoBehaviour, IPlayerComponent
 {
+    public event Action OnShootEvent;
+    [Range(0f, 100f)]
     public float shootPower;
+
     private Player _player;
     private Transform _cam;
     private bool _isHold;
@@ -45,9 +47,8 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
     {
         Mouse mouse = Mouse.current;
         float delta = Mathf.Round(mouse.delta.value.normalized.y);
-
+        delta = Mathf.Clamp(delta, 0, 100);
         shootPower += delta * _powerSensivity * Time.deltaTime; // 정규화 한 마우스 y축 이동값을 값을 넣어줌
-        shootPower = Mathf.Clamp(shootPower, 0, 100);
 
         _player.IsRelease = true;
 
@@ -83,5 +84,6 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
         shootPower = 0;
         _isHold = false;
         _player.IsRelease = false;
+        OnShootEvent?.Invoke();
     }
 }
