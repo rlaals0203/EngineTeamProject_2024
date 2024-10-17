@@ -5,7 +5,7 @@ using UnityEngine;
 
 public enum GoleEnum
 {
-    HIO = -100,
+    HOLE_IN_ONE = -100,
     CONDOR = -4,
     ALBATROSS = -3,
     EAGLE = -2,
@@ -19,10 +19,11 @@ public enum GoleEnum
 
 public class CheckGole : MonoBehaviour, IPlayerComponent
 {
-    public Action OnGoleEvent;
+    public Action<string> OnGoleEvent;
 
     private Player _player;
     private BallShooting _ballShoot;
+    private string _strokeName;
     private int _stroke;
     private int _par = 5;
 
@@ -43,15 +44,17 @@ public class CheckGole : MonoBehaviour, IPlayerComponent
     {
         if (_stroke <= 1)
         {
-            Debug.Log("Hole In One");
+            _strokeName = "HOLE_IN_ONE";
+            Debug.Log(_strokeName);
             return;
         }
 
         int par = _stroke - _par;
         GoleEnum gole = (GoleEnum)par;
-        Debug.Log(gole);
+        _strokeName = gole.ToString();
 
-        OnGoleEvent?.Invoke();
+        OnGoleEvent?.Invoke(_strokeName);
+        Debug.Log(_strokeName);
     }
 
     private void OnTriggerEnter(Collider other)
