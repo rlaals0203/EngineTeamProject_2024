@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateMachine : MonoBehaviour, IPlayerComponent
+public class StateMachine
 {
-    private Player _player;
-    [field:SerializeField] public State CurrentState { get; private set; }
+    public State CurrentState { get; private set; }
+
+    public Player Player;
 
     public Dictionary<StateEnum, State> stateDic = new Dictionary<StateEnum, State>();
 
-    public void Initialize(Player player)
+    public void InitializeState(StateEnum state, Player player)
     {
-        _player = player;
-        CurrentState = stateDic[StateEnum.Idle];
+        Player = player;
+        CurrentState = stateDic[state];
         CurrentState.EnterState();
     }
 

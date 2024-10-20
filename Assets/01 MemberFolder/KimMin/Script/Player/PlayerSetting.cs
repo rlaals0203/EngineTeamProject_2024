@@ -5,12 +5,22 @@ using UnityEngine;
 public class PlayerSetting : MonoBehaviour
 {
     [Header("Setting")]
-    public float mass;
-    public float drag;
+    public float mass = 0.1f;
+    public float drag = 0.1f;
+    public float decelerationPoint = 1.0f;
+    public float stopPoint = 0.05f;
 
-    public Rigidbody RigidCompo { get; private set; }
+    public Rigidbody RigidCompo { get; protected set; }
+    public PhysicMaterial PhysicsMatCompo { get; protected set; }
 
-    public bool IsIdle { get; set; }
-    public bool IsGoled { get; set; }
+    public bool IsIdle { get; set; } = false;
+    public bool IsRelease { get; set; } = false;
+    public bool IsShot { get; set; } = false;
 
+    public virtual void Awake()
+    {
+        RigidCompo = GetComponent<Rigidbody>();
+        PhysicsMatCompo = GetComponent<CapsuleCollider>().material;
+        RigidCompo.mass = mass;
+    }
 }
