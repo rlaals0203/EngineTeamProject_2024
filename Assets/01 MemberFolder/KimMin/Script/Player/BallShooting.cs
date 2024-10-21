@@ -48,7 +48,7 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
     {
         Mouse mouse = Mouse.current;
         float delta = Mathf.Round(mouse.delta.value.normalized.y);
-        shootPower += delta * _powerSensivity * Time.deltaTime;
+        shootPower -= delta * _powerSensivity * Time.deltaTime;
         shootPower = Mathf.Clamp(shootPower, 0, 100);
         // 정규화 한 마우스 y축 이동값을 값을 넣어줌
         _player.IsRelease = true;
