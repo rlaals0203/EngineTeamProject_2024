@@ -2,14 +2,14 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class ShootBar : MonoBehaviour
 {
     [SerializeField] private Player _player;
 
     private GameObject _background;
-    private GameObject _fill;
+    private Image _fill;
 
     private BallShooting _ballShooting;
     private CinemachineFreeLook _freeLook;
@@ -22,7 +22,7 @@ public class ShootBar : MonoBehaviour
         _freeLook = GameObject.Find("BallCamera").GetComponent<CinemachineFreeLook>();
 
         _background = transform.Find("Background").gameObject;
-        _fill = _background.transform.Find("Fill").gameObject;
+        _fill = _background.transform.Find("Fill").GetComponent<Image>();
     }
 
     private void Update()
@@ -38,8 +38,7 @@ public class ShootBar : MonoBehaviour
 
     private void ChangeSlider()
     {
-        _fill.transform.localScale = new Vector3
-            (_ballShooting.shootPower / 100,_fill.transform.localScale.y);
+        _fill.fillAmount = _ballShooting.shootPower / 100;
     }
 
     private void ActiveObjects(bool active)
