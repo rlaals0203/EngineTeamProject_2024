@@ -1,51 +1,91 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
-public class BallShooting : MonoBehaviour
+public class BallShooting : MonoBehaviour, IPlayerComponent
 {
-    public event Action OnShoot;
+    public event Action OnShootEvent;
 
-    [SerializeField] private float _shootPower;
+    [Range(0, 100f)] public float shootPower;
+    public int stroke = 0;
 
-    private Rigidbody _rigid;
+    private Player _player;
     private Transform _cam;
-    private Transform _player;
+    private bool _isHold;
+
+    [SerializeField] private float _powerSensivity = 10f;
 
     private void Awake()
     {
-        _player = GameObject.Find("Player").transform;
         _cam = GameObject.Find("PlayerCamera").transform;
-        _rigid = GetComponent<Rigidbody>();
+    }
+
+    public void Initialize(Player player)
+    {
+        _player = player;
     }
 
     private void Update()
     {
-        if (Input.GetMouseButton(0))
+        if(_isHold)
         {
-            Releasing();
+            if (_player.IsShot) return;
+
+            Release();
+        }
+
+        if (Mouse.current.leftButton.isPressed)
+        {
+            _isHold = true;
         }
     }
 
-    private void Releasing()
+    private void Release() //꾹 누르고 있을때
     {
-        float xPos = Input.GetAxis("Mouse X");
-        Debug.Log(xPos);
+        Mouse mouse = Mouse.current;
+        float delta = Mathf.Round(mouse.delta.value.normalized.y);
+        shootPower += delta * _powerSensivity * Time.deltaTime;
+        shootPower = Mathf.Clamp(shootPower, 0, 100);
+        // 정규화 한 마우스 y축 이동값을 값을 넣어줌
+        _player.IsRelease = true;
 
-        if (Input.GetMouseButtonUp(0))
+        if (Mouse.current.leftButton.wasReleasedThisFrame)
         {
             Shooting();
         }
+        else if(Keyboard.current.eKey.wasPressedThisFrame)
+        {
+            CancelShooting();
+        }
     }
 
-    private void Shooting()
+    private void CancelShooting() //슛 취소
+    {
+        shootPower = 0;
+        _player.IsRelease = false;
+        _isHold = false;
+    }
+
+    private void Shooting() //카메라가 플레이어 바라보는 방향으로 슛
     {
         Vector3 fixedPos = new Vector3
-            (_cam.position.x, _player.position.y, _cam.position.z);
-        Vector3 shootDir = (_player.position - fixedPos).normalized;
+            (_cam.position.x, _player.transform.position.y, _cam.position.z);
+        //카메라 y를 플레이어 y로 변환해 계산해줌
 
-        _rigid.AddForce(shootDir * _shootPower, ForceMode.Force);
-        OnShoot?.Invoke();
+        Vector3 shootDir =(_player.transform.position - fixedPos).normalized;
+
+        _player.RigidCompo.AddForce(shootDir * shootPower * 10, ForceMode.Force);
+
+        shootPower = 0;
+
+        _isHold = false;
+        _player.IsRelease = false;
+        _player.IsShot = true;
+        stroke++;
+        OnShootEvent?.Invoke();
     }
 }
