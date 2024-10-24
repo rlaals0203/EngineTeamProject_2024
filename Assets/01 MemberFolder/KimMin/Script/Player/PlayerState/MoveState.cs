@@ -11,14 +11,12 @@ public class MoveState : State
 
     public override void EnterState()
     {
-        _player.IsIdle = false;
+        _player.canShot = false;
+        _player.IsRelease = false;
     }
 
     public override void UpdateState()
     {
-        if (_player.RigidCompo.velocity == Vector3.zero)
-        {
-            _stateMachine.ChangeState(StateEnum.Idle);
-        }
+
     }
 }

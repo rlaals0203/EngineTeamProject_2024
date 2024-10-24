@@ -15,7 +15,9 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
 
     private Player _player;
     private Transform _cam;
+
     private bool _isHold;
+    private bool _isCancel;
 
     [SerializeField] private float _powerSensivity = 10f;
 
@@ -33,24 +35,27 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
     {
         if(_isHold)
         {
-            if (_player.IsShot) return;
-
-            Release();
+            if (_player.canShot)
+                Release();
         }
 
         if (Mouse.current.leftButton.isPressed)
         {
+            if (_isCancel) return;
             _isHold = true;
         }
+
+        if (Mouse.current.leftButton.wasReleasedThisFrame) _isCancel = false;
     }
 
     private void Release() //꾹 누르고 있을때
     {
         Mouse mouse = Mouse.current;
         float delta = Mathf.Round(mouse.delta.value.normalized.y);
-        shootPower += delta * _powerSensivity * Time.deltaTime;
+        shootPower -= delta * _powerSensivity * Time.deltaTime;
         shootPower = Mathf.Clamp(shootPower, 0, 100);
         // 정규화 한 마우스 y축 이동값을 값을 넣어줌
+
         _player.IsRelease = true;
 
         if (Mouse.current.leftButton.wasReleasedThisFrame)
@@ -67,7 +72,9 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
     {
         shootPower = 0;
         _player.IsRelease = false;
+
         _isHold = false;
+        _isCancel = true;
     }
 
     private void Shooting() //카메라가 플레이어 바라보는 방향으로 슛
@@ -80,11 +87,9 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
 
         _player.RigidCompo.AddForce(shootDir * shootPower * 10, ForceMode.Force);
 
-        shootPower = 0;
-
         _isHold = false;
-        _player.IsRelease = false;
-        _player.IsShot = true;
+
+        shootPower = 0;
         stroke++;
         OnShootEvent?.Invoke();
     }

@@ -10,8 +10,7 @@ public class IdleState : State
 
     public override void EnterState()
     {
-        _player.IsIdle = true;
-        _player.IsShot = false;
+        _player.canShot = true;
     }
 
     public override void UpdateState()
