@@ -16,7 +16,7 @@ public class BallPhysics : MonoBehaviour, IPlayerComponent
 
     private void Update()
     {
-        if (_player.IsShot)
+        if (!_player.canShot)
             FixedDeceleration();
     }
 
@@ -47,5 +47,15 @@ public class BallPhysics : MonoBehaviour, IPlayerComponent
         _player.RigidCompo.angularVelocity = Vector3.zero;
         _player.RigidCompo.drag = _player.drag;
         isStop = true;
+
+        StartCoroutine(ShotReadyRoutine());
+    }
+
+    private IEnumerator ShotReadyRoutine()
+    {
+        yield return new WaitForSeconds(1f);
+
+        if (_player.RigidCompo.velocity == Vector3.zero)
+            _player.stateMachine.ChangeState(StateEnum.Idle);
     }
 }

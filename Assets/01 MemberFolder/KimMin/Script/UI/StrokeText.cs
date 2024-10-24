@@ -13,7 +13,7 @@ public class StrokeText : MonoBehaviour
     private void Awake()
     {
         _player = GameObject.Find("Player")?.GetComponent<Player>();
-        _strokeTxt = transform.Find("StrokeText")?.GetComponent<TextMeshProUGUI>();
+        _strokeTxt = transform.GetComponentInChildren<TextMeshProUGUI>();
         _ballShoot = _player.GetComponent<BallShooting>();
 
         _ballShoot.OnShootEvent += HandleStrokeChanged;

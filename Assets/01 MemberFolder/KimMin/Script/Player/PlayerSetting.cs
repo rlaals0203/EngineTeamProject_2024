@@ -13,9 +13,8 @@ public class PlayerSetting : MonoBehaviour
     public Rigidbody RigidCompo { get; protected set; }
     public PhysicMaterial PhysicsMatCompo { get; protected set; }
 
-    public bool IsIdle { get; set; } = false;
     public bool IsRelease { get; set; } = false;
-    public bool IsShot { get; set; } = false;
+    public bool canShot { get; set; } = true;
 
     public virtual void Awake()
     {

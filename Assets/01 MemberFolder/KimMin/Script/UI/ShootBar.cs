@@ -27,7 +27,7 @@ public class ShootBar : MonoBehaviour
 
     private void Update()
     {
-        if (_player.IsRelease)
+        if (_player.IsRelease && _player.canShot)
         {
             ChangeSlider();
             ActiveObjects(true);
