@@ -2,6 +2,7 @@ using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -18,12 +19,15 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
 
     private bool _isHold;
     private bool _isCancel;
+    private bool isFine = false;
 
-    [SerializeField] private float _powerSensivity = 10f;
+    [SerializeField] private float _powerSensivity = 20f;
+    private float _prevSensivity;
 
     private void Awake()
     {
         _cam = GameObject.Find("PlayerCamera").transform;
+        _prevSensivity = _powerSensivity;
     }
 
     public void Initialize(Player player)
@@ -33,16 +37,15 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
 
     private void Update()
     {
-        if(_isHold)
+        if(_isHold && _player.canShot)
         {
-            if (_player.canShot)
-                Release();
+            Release();
         }
 
         if (Mouse.current.leftButton.isPressed)
         {
-            if (_isCancel) return;
-            _isHold = true;
+            if (!_isCancel)
+                _isHold = true;
         }
 
         if (Mouse.current.leftButton.wasReleasedThisFrame) _isCancel = false;
@@ -50,6 +53,11 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
 
     private void Release() //꾹 누르고 있을때
     {
+        if (Keyboard.current.shiftKey.isPressed)
+            _powerSensivity = _prevSensivity / 3f;
+        else
+            _powerSensivity = _prevSensivity;
+
         Mouse mouse = Mouse.current;
         float delta = Mathf.Round(mouse.delta.value.normalized.y);
         shootPower -= delta * _powerSensivity * Time.deltaTime;
