@@ -26,7 +26,7 @@ public class BallPhysics : MonoBehaviour, IPlayerComponent
 
         if (speed <= _player.decelerationPoint && !isDecelerate)
         {
-            _player.RigidCompo.drag = 1f;
+            //_player.RigidCompo.drag = 1f;
             isDecelerate = true;
         }
         else if(speed <= _player.stopPoint && !isStop)
@@ -45,7 +45,7 @@ public class BallPhysics : MonoBehaviour, IPlayerComponent
     {
         _player.RigidCompo.velocity = Vector3.zero;
         _player.RigidCompo.angularVelocity = Vector3.zero;
-        _player.RigidCompo.drag = _player.drag;
+        //_player.RigidCompo.drag = _player.drag;
         isStop = true;
 
         StartCoroutine(ShotReadyRoutine());

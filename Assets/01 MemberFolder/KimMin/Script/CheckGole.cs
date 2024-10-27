@@ -22,7 +22,7 @@ public enum GoleEnum
 
 public class CheckGole : MonoBehaviour, IPlayerComponent
 {
-    public Action<string> OnGoleEvent;
+    public Action<int, string> OnGoleEvent;
 
     private Player _player;
     private BallShooting _ballShoot;
@@ -48,7 +48,7 @@ public class CheckGole : MonoBehaviour, IPlayerComponent
         GoleEnum gole = (GoleEnum)par;
         _strokeName = gole.ToString();
 
-        OnGoleEvent?.Invoke(_strokeName);
+        OnGoleEvent?.Invoke(_ballShoot.stroke, _strokeName);
         Debug.Log(_strokeName);
     }
 

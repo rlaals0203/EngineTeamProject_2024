@@ -20,6 +20,8 @@ public class StageManager : MonoBehaviour
     public Dictionary<StageEnum, GameObject[,]> MapDic = new 
         Dictionary<StageEnum, GameObject[,]>();
 
+    protected int[] _strokes = new int[12];
+
     public StageEnum CurrentStage { get; private set; }
 
     private void Awake()

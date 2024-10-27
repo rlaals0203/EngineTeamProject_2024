@@ -15,9 +15,10 @@ public class HoleManager : StageManager
         _checkGole.OnGoleEvent += HandleGole;
     }
 
-    private void HandleGole(string strokeName)
+    private void HandleGole(int stroke, string strokeName)
     {
         Debug.Log(strokeName);
+        _strokes[_currentHole - 1] = stroke;
 
         HoleInitRoutine();
     }
