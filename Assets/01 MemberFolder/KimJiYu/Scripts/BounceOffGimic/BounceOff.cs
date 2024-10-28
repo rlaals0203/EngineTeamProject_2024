@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpinBarGimic : MonoBehaviour
+public class BounceOff : MonoBehaviour
 {
     [SerializeField] private float _bouncePower;
 
