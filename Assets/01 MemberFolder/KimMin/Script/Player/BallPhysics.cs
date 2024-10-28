@@ -17,7 +17,7 @@ public class BallPhysics : MonoBehaviour, IPlayerComponent
     private void Update()
     {
         if (!_player.canShot)
-            FixedDeceleration();
+            FixedDeceleration(); 
     }
 
     private void FixedDeceleration()
@@ -26,18 +26,13 @@ public class BallPhysics : MonoBehaviour, IPlayerComponent
 
         if (speed <= _player.decelerationPoint && !isDecelerate)
         {
-            //_player.RigidCompo.drag = 1f;
+            _player.RigidCompo.drag = 1f;
             isDecelerate = true;
         }
         else if(speed <= _player.stopPoint && !isStop)
         {
+            if (isStop) return;
             StopBall();
-        }
-
-        if (isStop && isDecelerate)
-        {
-            isDecelerate = false;
-            isStop = false;
         }
     }
 
@@ -45,7 +40,7 @@ public class BallPhysics : MonoBehaviour, IPlayerComponent
     {
         _player.RigidCompo.velocity = Vector3.zero;
         _player.RigidCompo.angularVelocity = Vector3.zero;
-        //_player.RigidCompo.drag = _player.drag;
+        _player.RigidCompo.drag = _player.drag;
         isStop = true;
 
         StartCoroutine(ShotReadyRoutine());
@@ -57,5 +52,13 @@ public class BallPhysics : MonoBehaviour, IPlayerComponent
 
         if (_player.RigidCompo.velocity == Vector3.zero)
             _player.stateMachine.ChangeState(StateEnum.Idle);
+
+        isDecelerate = false;
+        isStop = false;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        _player.RigidCompo.velocity = new Vector2(_player.RigidCompo.velocity.x, 0f);
     }
 }

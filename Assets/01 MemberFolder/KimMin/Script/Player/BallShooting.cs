@@ -93,12 +93,13 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
 
         Vector3 shootDir =(_player.transform.position - fixedPos).normalized;
 
-        _player.RigidCompo.AddForce(shootDir * shootPower * 10, ForceMode.Force);
+        //_player.RigidCompo.AddForce(shootDir * shootPower * 10, ForceMode.Force);
+        _player.RigidCompo.velocity = shootDir * shootPower;
 
         _isHold = false;
 
-        shootPower = 0;
         stroke++;
+        shootPower = 0;
         OnShootEvent?.Invoke();
     }
 }

@@ -19,7 +19,7 @@ public class PlayerSetting : MonoBehaviour
     public virtual void Awake()
     {
         RigidCompo = GetComponent<Rigidbody>();
-        PhysicsMatCompo = GetComponent<CapsuleCollider>().material;
+        PhysicsMatCompo = GetComponent<SphereCollider>().material;
         RigidCompo.mass = mass;
     }
 }
