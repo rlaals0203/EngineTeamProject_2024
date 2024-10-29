@@ -59,6 +59,13 @@ public class BallPhysics : MonoBehaviour, IPlayerComponent
 
     private void OnCollisionEnter(Collision collision)
     {
-        _player.RigidCompo.velocity = new Vector2(_player.RigidCompo.velocity.x, 0f);
+        _player.RigidCompo.velocity = new Vector3(_player.RigidCompo.velocity.x, 0f, 
+                _player.RigidCompo.velocity.z);
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        _player.RigidCompo.velocity = new Vector3(_player.RigidCompo.velocity.x, 0f,
+                _player.RigidCompo.velocity.z);
     }
 }
