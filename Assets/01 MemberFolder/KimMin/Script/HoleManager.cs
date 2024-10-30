@@ -39,7 +39,7 @@ public class HoleManager : MonoBehaviour
     public void InitializeStage(int hole)
     {
         _stageManager.player.transform.position = _stageManager.testMaps
-            [hole].transform.Find("StartPos").transform.position;
+                    [hole].transform.Find("StartPos").transform.position;
     }
 
     private IEnumerator HoleInitRoutine()
