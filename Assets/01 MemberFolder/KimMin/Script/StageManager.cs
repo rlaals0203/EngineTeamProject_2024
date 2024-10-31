@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.TextCore.Text;
 using UnityEngine;
 
 public enum StageEnum
@@ -16,10 +17,12 @@ public class StageManager : MonoBehaviour
 
     public Player player;
     public CinemachineFreeLook freeLook;
+    public GameObject[] testMaps;
 
     public Dictionary<StageEnum, GameObject[,]> MapDic = new 
         Dictionary<StageEnum, GameObject[,]>();
 
+    public int[] _strokes = new int[12];
     public StageEnum CurrentStage { get; private set; }
 
     private void Awake()
