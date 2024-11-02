@@ -39,7 +39,6 @@ public class BallPhysics : MonoBehaviour, IPlayerComponent
     private void StopBall()
     {
         _player.RigidCompo.velocity = Vector3.zero;
-        _player.RigidCompo.angularVelocity = Vector3.zero;
         _player.RigidCompo.drag = _player.drag;
         isStop = true;
 
@@ -48,13 +47,16 @@ public class BallPhysics : MonoBehaviour, IPlayerComponent
 
     private IEnumerator ShotReadyRoutine()
     {
+        if (!isStop || !isDecelerate) yield return null;
+
         yield return new WaitForSeconds(1f);
 
         if (_player.RigidCompo.velocity == Vector3.zero)
+        {
             _player.stateMachine.ChangeState(StateEnum.Idle);
-
-        isDecelerate = false;
-        isStop = false;
+            isDecelerate = false;
+            isStop = false;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)

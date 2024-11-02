@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,12 +17,19 @@ public class DrawDirectionLine : MonoBehaviour, IPlayerComponent
 
     private void Awake()
     {
+        Debug.Log(_player);
+        _player.GetCompo<BallShooting>().OnShootEvent += HandleShoot;
         _shootDirLine = GetComponentInChildren<LineRenderer>();
     }
 
     private void Update()
     {
         ChangeDirection();
+    }
+
+    private void HandleShoot()
+    {
+        //_shootDirLine.enabled = false;
     }
 
     private void ChangeDirection()
