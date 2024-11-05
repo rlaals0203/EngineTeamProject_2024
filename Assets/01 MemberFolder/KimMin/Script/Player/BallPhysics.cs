@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -5,6 +6,8 @@ using UnityEngine;
 
 public class BallPhysics : MonoBehaviour, IPlayerComponent
 {
+    public event Action OnShootEndEvent;
+
     private Player _player;
     private bool isDecelerate = false;
     private bool isStop = false;
@@ -56,6 +59,8 @@ public class BallPhysics : MonoBehaviour, IPlayerComponent
             _player.stateMachine.ChangeState(StateEnum.Idle);
             isDecelerate = false;
             isStop = false;
+
+            OnShootEndEvent?.Invoke();
         }
     }
 
