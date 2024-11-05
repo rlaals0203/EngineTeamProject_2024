@@ -1597,7 +1597,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 273088123}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 1, z: 5.551115e-17, w: 0}
+  m_LocalRotation: {x: -0, y: 1, z: -4e-45, w: 3e-45}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2003,7 +2003,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 451555874}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0000000016082888, y: 0.99891925, z: 0.046479546, w: 0.000000034564682}
+  m_LocalRotation: {x: 0.0000000016150403, y: 0.99891925, z: 0.046479546, w: -0.00000003470978}
   m_LocalPosition: {x: 0, y: 0, z: 16.666664}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2218,7 +2218,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 453262391}
   serializedVersion: 2
-  m_LocalRotation: {x: -7.986468e-10, y: 0.99891925, z: 0.04647954, w: 0.00000001716419}
+  m_LocalRotation: {x: 8.1215684e-10, y: 0.99891925, z: 0.046479546, w: -0.00000001745454}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3910,7 +3910,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 770319833}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.9997286, z: 0.023296414, w: -1e-45}
+  m_LocalRotation: {x: -0, y: 0.9997286, z: 0.023296414, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6816,7 +6816,7 @@ LineRenderer:
       serializedVersion: 2
       key0: {r: 1, g: 1, b: 1, a: 1}
       key1: {r: 0.34276712, g: 0.8810537, b: 1, a: 1}
-      key2: {r: 0, g: 0, b: 0, a: 0}
+      key2: {r: 0, g: 0, b: 0, a: 1}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
@@ -6831,8 +6831,8 @@ LineRenderer:
       ctime6: 0
       ctime7: 0
       atime0: 0
-      atime1: 65535
-      atime2: 0
+      atime1: 58468
+      atime2: 65535
       atime3: 0
       atime4: 0
       atime5: 0
@@ -6841,7 +6841,7 @@ LineRenderer:
       m_Mode: 0
       m_ColorSpace: 0
       m_NumColorKeys: 2
-      m_NumAlphaKeys: 2
+      m_NumAlphaKeys: 3
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
