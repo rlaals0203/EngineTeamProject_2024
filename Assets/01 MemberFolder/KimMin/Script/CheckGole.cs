@@ -40,14 +40,15 @@ public class CheckGole : MonoBehaviour, IPlayerComponent
         if (_ballShoot.stroke <= 1)
         {
             _strokeName = "HOLE_IN_ONE";
-            Debug.Log(_strokeName);
-            return;
+        }
+        else
+        {
+            int par = _ballShoot.stroke - _par;
+            GoleEnum gole = (GoleEnum)par;
+            _strokeName = gole.ToString();
         }
 
-        int par = _ballShoot.stroke - _par;
-        GoleEnum gole = (GoleEnum)par;
-        _strokeName = gole.ToString();
-
+        _ballShoot.stroke = 0;
         OnGoleEvent?.Invoke(_ballShoot.stroke, _strokeName);
         Debug.Log(_strokeName);
     }

@@ -21,10 +21,7 @@ public class HoleManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            _checkGole.OnGoleEvent?.Invoke(1, "HIO");
-        }
+
     }
 
     private void HandleGole(int stroke, string strokeName)
@@ -38,8 +35,8 @@ public class HoleManager : MonoBehaviour
 
     public void InitializeStage(int hole)
     {
-        _stageManager.player.transform.position = _stageManager.testMaps
-                    [hole].transform.Find("StartPos").transform.position;
+        _stageManager.player.transform.position = _stageManager.testMaps[hole - 1]
+                            .transform.Find("StartPos").transform.position;
     }
 
     private IEnumerator HoleInitRoutine()
