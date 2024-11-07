@@ -48,8 +48,8 @@ public class CheckGole : MonoBehaviour, IPlayerComponent
             _strokeName = gole.ToString();
         }
 
-        _ballShoot.stroke = 0;
         OnGoleEvent?.Invoke(_ballShoot.stroke, _strokeName);
+        _ballShoot.stroke = 0;
         Debug.Log(_strokeName);
     }
 

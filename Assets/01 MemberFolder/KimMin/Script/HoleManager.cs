@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class HoleManager : MonoBehaviour
 {
-    private int _currentHole;
-    private CheckGole _checkGole;
-    private StageManager _stageManager;
+    public int _currentHole;
+    public CheckGole _checkGole;
+    public StageManager _stageManager;
 
     private void Awake()
     {
@@ -42,7 +42,7 @@ public class HoleManager : MonoBehaviour
     private IEnumerator HoleInitRoutine()
     {
         Debug.Log("재정비 시간");
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(4.0f);
         InitializeStage(++_currentHole);
     }
 }
