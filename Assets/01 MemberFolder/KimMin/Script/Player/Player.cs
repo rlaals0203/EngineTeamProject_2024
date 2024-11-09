@@ -21,7 +21,6 @@ public class Player : PlayerSetting
 
         stateMachine.AddState(StateEnum.Idle, new IdleState(this, stateMachine));
         stateMachine.AddState(StateEnum.Move, new MoveState(this, stateMachine));
-
         stateMachine.InitializeState(StateEnum.Idle, this);
 
         _components = new Dictionary<Type, IPlayerComponent>();

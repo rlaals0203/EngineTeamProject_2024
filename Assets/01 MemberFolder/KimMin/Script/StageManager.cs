@@ -22,7 +22,7 @@ public class StageManager : MonoBehaviour
     public Dictionary<StageEnum, GameObject[,]> MapDic = new 
         Dictionary<StageEnum, GameObject[,]>();
 
-    public int[] _strokes = new int[12];
+    public int[] _strokes = new int[9];
     public StageEnum CurrentStage { get; private set; }
 
     private void Awake()

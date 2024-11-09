@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class HoleManager : MonoBehaviour
 {
-    private int _currentHole;
-    private CheckGole _checkGole;
-    private StageManager _stageManager;
+    public int _currentHole;
+    public CheckGole _checkGole;
+    public StageManager _stageManager;
 
     private void Awake()
     {
@@ -21,10 +21,7 @@ public class HoleManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            _checkGole.OnGoleEvent?.Invoke(1, "HIO");
-        }
+
     }
 
     private void HandleGole(int stroke, string strokeName)
@@ -38,14 +35,14 @@ public class HoleManager : MonoBehaviour
 
     public void InitializeStage(int hole)
     {
-        _stageManager.player.transform.position = _stageManager.testMaps
-                    [hole].transform.Find("StartPos").transform.position;
+        _stageManager.player.transform.position = _stageManager.testMaps[hole - 1]
+                            .transform.Find("StartPos").transform.position;
     }
 
     private IEnumerator HoleInitRoutine()
     {
         Debug.Log("재정비 시간");
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(4.0f);
         InitializeStage(++_currentHole);
     }
 }

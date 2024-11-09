@@ -11,7 +11,9 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
 {
     public event Action OnShootEvent;
 
+    [SerializeField] private float _powerSensivity = 20f;
     [Range(0, 100f)] public float shootPower;
+
     public int stroke = 0;
 
     private Player _player;
@@ -19,9 +21,7 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
 
     private bool _isHold;
     private bool _isCancel;
-    private bool isFine = false;
 
-    [SerializeField] private float _powerSensivity = 20f;
     private float _prevSensivity;
 
     private void Awake()

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class DrawDirectionLine : MonoBehaviour, IPlayerComponent
 {
@@ -13,12 +14,13 @@ public class DrawDirectionLine : MonoBehaviour, IPlayerComponent
     public void Initialize(Player player)
     {
         _player = player;
+        _player.GetCompo<BallShooting>().OnShootEvent += HandleShoot;
+        _player.GetCompo<BallPhysics>().OnShootEndEvent += HandleShootEnd;
+
     }
 
     private void Awake()
     {
-        Debug.Log(_player);
-        _player.GetCompo<BallShooting>().OnShootEvent += HandleShoot;
         _shootDirLine = GetComponentInChildren<LineRenderer>();
     }
 
@@ -29,7 +31,12 @@ public class DrawDirectionLine : MonoBehaviour, IPlayerComponent
 
     private void HandleShoot()
     {
-        //_shootDirLine.enabled = false;
+        _shootDirLine.enabled = false;
+    }
+
+    private void HandleShootEnd()
+    {
+        _shootDirLine.enabled = true;
     }
 
     private void ChangeDirection()
@@ -38,9 +45,7 @@ public class DrawDirectionLine : MonoBehaviour, IPlayerComponent
             (_cam.position.x, _player.transform.position.y, _cam.position.z);
 
         Vector3 shootDir = _player.transform.position - fixedPos;
-        Quaternion lookRot = Quaternion.LookRotation(shootDir, Vector3.up);
 
-        _shootDirLine.gameObject.transform.localRotation = Quaternion.Euler(0, lookRot.y, 0);
-        Debug.Log(_shootDirLine.gameObject.name);
+        _shootDirLine.gameObject.transform.localRotation = Quaternion.LookRotation(shootDir, Vector2.up);
     }
 }

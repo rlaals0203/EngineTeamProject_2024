@@ -10,6 +10,8 @@ public class PlayerSetting : MonoBehaviour
     public float decelerationPoint = 1.0f;
     public float stopPoint = 0.05f;
 
+    public float startDrag => drag;
+
     public Rigidbody RigidCompo { get; protected set; }
     public PhysicMaterial PhysicsMatCompo { get; protected set; }
 

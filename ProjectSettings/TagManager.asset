@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Wall
   - Hole
+  - Other
   layers:
   - Default
   - TransparentFX
