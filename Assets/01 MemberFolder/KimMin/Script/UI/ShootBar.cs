@@ -12,14 +12,14 @@ public class ShootBar : MonoBehaviour
     private Image _fill;
 
     private BallShooting _ballShooting;
-    private CinemachineFreeLook _freeLook;
+    private CinemachineFreeLook _freeLookCam;
 
     private bool _isActive;
 
     public void Awake()
     {
         _ballShooting = _player.GetComponent<BallShooting>();
-        _freeLook = GameObject.Find("BallCamera").GetComponent<CinemachineFreeLook>();
+        _freeLookCam = GameObject.Find("BallCamera").GetComponent<CinemachineFreeLook>();
 
         _background = transform.Find("Background").gameObject;
         _fill = _background.transform.Find("Fill").GetComponent<Image>();
@@ -27,7 +27,7 @@ public class ShootBar : MonoBehaviour
 
     private void Update()
     {
-        if (_player.IsRelease && _player.canShot)
+        if (_player.IsRelease)
         {
             ChangeSlider();
             ActiveObjects(true);
@@ -49,6 +49,6 @@ public class ShootBar : MonoBehaviour
         _isActive = active;
 
         _background.SetActive(active);
-        _freeLook.enabled = !active;
+        _freeLookCam.enabled = !active;
     }
 }
