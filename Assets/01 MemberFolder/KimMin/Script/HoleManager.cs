@@ -19,11 +19,6 @@ public class HoleManager : MonoBehaviour
         _currentHole = 1;
     }
 
-    private void Update()
-    {
-
-    }
-
     private void HandleGole(int stroke, string strokeName)
     {
         _stageManager._strokes[_currentHole - 1] = stroke;
@@ -36,7 +31,8 @@ public class HoleManager : MonoBehaviour
     public void InitializeStage(int hole)
     {
         _stageManager.player.transform.position = _stageManager.testMaps[hole - 1]
-                            .transform.Find("StartPos").transform.position;
+                            .transform.Find("End_01")
+                            .transform.Find("StartPos").position;
     }
 
     private IEnumerator HoleInitRoutine()

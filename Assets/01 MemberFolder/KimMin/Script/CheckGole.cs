@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public enum GoleEnum
 {
@@ -37,10 +38,10 @@ public class CheckGole : MonoBehaviour, IPlayerComponent
 
     private void OnGole()
     {
+        if (_player.RigidCompo.velocity == Vector3.zero) return;
+
         if (_ballShoot.stroke <= 1)
-        {
             _strokeName = "HOLE_IN_ONE";
-        }
         else
         {
             int par = _ballShoot.stroke - _par;
@@ -48,6 +49,7 @@ public class CheckGole : MonoBehaviour, IPlayerComponent
             _strokeName = gole.ToString();
         }
 
+        _player.RigidCompo.velocity = Vector3.zero;
         OnGoleEvent?.Invoke(_ballShoot.stroke, _strokeName);
         _ballShoot.stroke = 0;
         Debug.Log(_strokeName);

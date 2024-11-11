@@ -42,7 +42,7 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
             Release();
         }
 
-        if (Mouse.current.leftButton.isPressed)
+        if (Input.GetMouseButtonDown(0))
         {
             if (!_isCancel)
                 _isHold = true;
@@ -57,6 +57,9 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
             _powerSensivity = _prevSensivity / 3f;
         else
             _powerSensivity = _prevSensivity;
+
+        Debug.Log("release");
+
 
         Mouse mouse = Mouse.current;
         float delta = Mathf.Round(mouse.delta.value.normalized.y);
@@ -87,6 +90,7 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
 
     private void Shooting() //카메라가 플레이어 바라보는 방향으로 슛
     {
+        Debug.Log("Shoot");
         Vector3 fixedPos = new Vector3
             (_cam.position.x, _player.transform.position.y, _cam.position.z);
         //카메라 y를 플레이어 y로 변환해 계산해줌

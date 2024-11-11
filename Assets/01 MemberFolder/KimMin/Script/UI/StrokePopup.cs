@@ -7,6 +7,8 @@ public class StrokePopup : MonoBehaviour
     private TextMeshProUGUI _popUpText;
     [SerializeField] private CheckGole _checkGole;
 
+    private Sequence _sequence;
+
     private void Awake()
     {
         _popUpText = GetComponentInChildren<TextMeshProUGUI>();
@@ -16,7 +18,11 @@ public class StrokePopup : MonoBehaviour
 
     private void HandleOnGole(int stroke, string strokeName)
     {
+        _sequence = DOTween.Sequence();
         _popUpText.text = strokeName;
-        _popUpText.transform.DOScale(2, 0.5f).SetEase(Ease.InOutBack);
+
+        _sequence.Append(_popUpText.transform.DOScale(1.5f, 0.5f))
+            .AppendInterval(0.5f)
+            .Append(_popUpText.transform.DOScale(0, 0.5f).SetEase(Ease.InOutBack));
     }
 }
