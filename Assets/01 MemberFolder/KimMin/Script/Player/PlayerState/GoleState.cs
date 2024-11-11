@@ -11,6 +11,5 @@ public class GoleState : State
     public override void EnterState()
     {
         base.EnterState();
-
     }
 }

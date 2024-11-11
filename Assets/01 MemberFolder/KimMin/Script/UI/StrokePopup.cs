@@ -4,9 +4,9 @@ using DG.Tweening;
 
 public class StrokePopup : MonoBehaviour
 {
-    private TextMeshProUGUI _popUpText;
     [SerializeField] private CheckGole _checkGole;
 
+    private TextMeshProUGUI _popUpText;
     private Sequence _sequence;
 
     private void Awake()
@@ -16,13 +16,20 @@ public class StrokePopup : MonoBehaviour
         _popUpText.transform.localScale = Vector3.zero;
     }
 
-    private void HandleOnGole(int stroke, string strokeName)
+    private void HandleOnGole(int stroke, GoleEnum gole)
     {
-        _sequence = DOTween.Sequence();
-        _popUpText.text = strokeName;
+        Color col = _checkGole.strokeDic[gole];
 
-        _sequence.Append(_popUpText.transform.DOScale(1.5f, 0.5f))
+        _sequence = DOTween.Sequence();
+        _popUpText.color = col;
+        _popUpText.text = gole.ToString();
+
+        Debug.Log(col);
+
+        _sequence
+            .Append(_popUpText.transform.DOScale(1.5f, 0.5f))
             .AppendInterval(0.5f)
-            .Append(_popUpText.transform.DOScale(0, 0.5f).SetEase(Ease.InOutBack));
+            .Append(_popUpText.transform.DOScale(0, 0.5f)
+            .SetEase(Ease.InOutBack));
     }
 }

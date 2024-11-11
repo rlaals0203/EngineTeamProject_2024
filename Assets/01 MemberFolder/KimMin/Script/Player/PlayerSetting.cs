@@ -17,6 +17,7 @@ public class PlayerSetting : MonoBehaviour
 
     public bool IsRelease { get; set; } = false;
     public bool canShot { get; set; } = true;
+    public bool IsGole { get; set; } = false;
 
     public virtual void Awake()
     {

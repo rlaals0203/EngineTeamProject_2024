@@ -19,7 +19,7 @@ public class LeaderBoard : MonoBehaviour
         _holeManager._checkGole.OnGoleEvent += HandleOnGole;
     }
 
-    private void HandleOnGole(int stroke, string strokeText)
+    private void HandleOnGole(int stroke, GoleEnum gole)
     {
         _strokeTexts[_holeManager._currentHole - 1].text = stroke.ToString();
     }

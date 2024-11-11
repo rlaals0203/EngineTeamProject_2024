@@ -69,8 +69,6 @@ public class BallPhysics : MonoBehaviour, IPlayerComponent
         _isSet = false;
 
         StartCoroutine(ShotReadyRoutine());
-
-        Debug.Log("c");
     }
 
     private IEnumerator ShotReadyRoutine()
