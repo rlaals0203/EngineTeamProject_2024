@@ -6997,6 +6997,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9197649512380069896}
+  - component: {fileID: 9197649512380069897}
   m_Layer: 5
   m_Name: Timer
   m_TagString: Untagged
@@ -7639,10 +7640,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d24b0c802ebcd4e8fb20a4acef2d8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1
+  mass: 2
   drag: 0.5
   decelerationPoint: 10
-  stopPoint: 0.1
+  stopPoint: 0.2
 --- !u!4 &2558346372900578093
 Transform:
   m_ObjectHideFlags: 3
@@ -10506,7 +10507,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4536777843926794316}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0000000016150736, y: 0.99891925, z: 0.046479546, w: -0.000000034710496}
+  m_LocalRotation: {x: -0.0000000016057617, y: 0.99891925, z: 0.046479546, w: 0.000000034510368}
   m_LocalPosition: {x: 0, y: 0, z: 16.666664}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -11882,7 +11883,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1600520692140264169}
   serializedVersion: 2
-  m_LocalRotation: {x: 8.122235e-10, y: 0.99891925, z: 0.046479546, w: -0.000000017455973}
+  m_LocalRotation: {x: -7.935453e-10, y: 0.99891925, z: 0.04647954, w: 0.000000017054548}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -12106,6 +12107,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 450}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &9197649512380069897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490851752519571367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb97b25482d1d9241b9ddd26b2f6993b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ballShooting: {fileID: 3434542482871444372}
+  _checkGole: {fileID: 4187776397693501261}
+  _time: 90
 --- !u!1 &9221703420594619847
 GameObject:
   m_ObjectHideFlags: 0
