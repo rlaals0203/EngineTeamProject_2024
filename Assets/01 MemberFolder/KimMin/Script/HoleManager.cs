@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class HoleManager : MonoBehaviour
 {
+    public float timeToReady = 4.0f;
     public int _currentHole;
     public CheckGole _checkGole;
     public StageManager _stageManager;
@@ -19,16 +20,11 @@ public class HoleManager : MonoBehaviour
         _currentHole = 1;
     }
 
-    private void Update()
-    {
-
-    }
-
-    private void HandleGole(int stroke, string strokeName)
+    private void HandleGole(int stroke, GoleEnum gole)
     {
         _stageManager._strokes[_currentHole - 1] = stroke;
 
-        Debug.Log($"타수 : {stroke}, {strokeName}");
+        Debug.Log($"타수 : {stroke}, {gole.ToString()}");
 
         StartCoroutine(HoleInitRoutine());
     }
@@ -36,13 +32,15 @@ public class HoleManager : MonoBehaviour
     public void InitializeStage(int hole)
     {
         _stageManager.player.transform.position = _stageManager.testMaps[hole - 1]
-                            .transform.Find("StartPos").transform.position;
+                            .transform.Find("End_01")
+                            .transform.Find("StartPos").position;
+
+        _stageManager.player.IsGole = false;
     }
 
     private IEnumerator HoleInitRoutine()
     {
-        Debug.Log("재정비 시간");
-        yield return new WaitForSeconds(4.0f);
+        yield return new WaitForSeconds(timeToReady);
         InitializeStage(++_currentHole);
     }
 }

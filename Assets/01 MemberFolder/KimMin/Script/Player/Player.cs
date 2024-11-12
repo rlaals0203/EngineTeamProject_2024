@@ -45,4 +45,9 @@ public class Player : PlayerSetting
         }
         return default;
     }
+
+    public void StopImmediatly()
+    {
+        RigidCompo.velocity = Vector3.zero;
+    }
 }

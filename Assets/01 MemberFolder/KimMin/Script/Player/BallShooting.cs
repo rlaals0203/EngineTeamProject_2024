@@ -42,7 +42,7 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
             Release();
         }
 
-        if (Mouse.current.leftButton.isPressed)
+        if (Input.GetMouseButtonDown(0))
         {
             if (!_isCancel)
                 _isHold = true;

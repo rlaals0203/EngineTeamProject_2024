@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public enum GoleEnum
 {
@@ -22,7 +23,9 @@ public enum GoleEnum
 
 public class CheckGole : MonoBehaviour, IPlayerComponent
 {
-    public Action<int, string> OnGoleEvent;
+    public Action<int, GoleEnum> OnGoleEvent;
+
+    public Dictionary<GoleEnum, Color> strokeDic = new Dictionary<GoleEnum, Color>();
 
     private Player _player;
     private BallShooting _ballShoot;
@@ -33,24 +36,38 @@ public class CheckGole : MonoBehaviour, IPlayerComponent
     {
         _player = player;
         _ballShoot = _player.GetCompo<BallShooting>();
+
+        #region DictionaryAdd
+        strokeDic.Add(GoleEnum.HOLE_IN_ONE, new Color(250, 190, 65, 255));
+        strokeDic.Add(GoleEnum.CONDOR, new Color(200, 60, 250, 255));
+        strokeDic.Add(GoleEnum.ALBATROSS, new Color(250, 250, 150, 255));
+        strokeDic.Add(GoleEnum.EAGLE, new Color(255, 100, 0, 255));
+        strokeDic.Add(GoleEnum.BIRDIE, new Color(100, 255, 255, 255));
+        strokeDic.Add(GoleEnum.PAR, new Color(255, 255, 255, 255));
+        strokeDic.Add(GoleEnum.BOGEY, new Color(200, 200, 200, 255));
+        strokeDic.Add(GoleEnum.DOUBLE_BOGEY, new Color(175, 175, 175, 255));
+        strokeDic.Add(GoleEnum.TRIPLE_BOGEY, new Color(150, 150, 150, 255));
+        strokeDic.Add(GoleEnum.QUADRUPLE_BOGEY, new Color(125, 125, 125, 255));
+        strokeDic.Add(GoleEnum.QUINTUPLE_BOGEY, new Color(100, 100, 100, 255));
+        strokeDic.Add(GoleEnum.SEXTUPLE_BOGEY, new Color(75, 75, 75, 255));
+        strokeDic.Add(GoleEnum.SEPTUPLE_BOGEY, new Color(50, 50, 50, 255));
+        #endregion
     }
 
     private void OnGole()
     {
-        if (_ballShoot.stroke <= 1)
-        {
-            _strokeName = "HOLE_IN_ONE";
-        }
-        else
-        {
-            int par = _ballShoot.stroke - _par;
-            GoleEnum gole = (GoleEnum)par;
-            _strokeName = gole.ToString();
-        }
+        if (_player.RigidCompo.velocity == Vector3.zero || _player.IsGole) return;
 
-        OnGoleEvent?.Invoke(_ballShoot.stroke, _strokeName);
+        int par = _ballShoot.stroke > 1 ? _ballShoot.stroke - _par : -100;
+        Debug.Log(par);
+        GoleEnum gole = (GoleEnum)par;
+
+        OnGoleEvent?.Invoke(_ballShoot.stroke, gole);
+
+        _player.StopImmediatly();
+        _player.IsGole = true;
+
         _ballShoot.stroke = 0;
-        Debug.Log(_strokeName);
     }
 
     private void OnTriggerEnter(Collider other)
