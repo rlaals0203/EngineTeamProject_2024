@@ -49,8 +49,6 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
         }
 
         if (Mouse.current.leftButton.wasReleasedThisFrame) _isCancel = false;
-
-        Debug.Log(stroke);
     }
 
     private void Release() //꾹 누르고 있을때
