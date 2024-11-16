@@ -32,7 +32,7 @@ public class HoleManager : MonoBehaviour
     public void InitializeStage(int hole)
     {
         _stageManager.player.transform.position = _stageManager.testMaps[hole - 1]
-                            .transform.Find("End_01")
+                            .transform.Find("End")
                             .transform.Find("StartPos").position;
 
         _stageManager.player.IsGole = false;

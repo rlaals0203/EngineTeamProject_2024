@@ -10,12 +10,12 @@ public class IdleState : State
 
     public override void EnterState()
     {
-        _player.canShot = true;
+        _player.CanShot = true;
     }
 
     public override void UpdateState()
     {
-        if (_player.RigidCompo.velocity != Vector3.zero)
+        if (_player.playerVelocity >= _player.stopPoint * 2)
         {
             _stateMachine.ChangeState(StateEnum.Move);
         }

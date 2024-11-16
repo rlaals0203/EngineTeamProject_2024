@@ -17,7 +17,7 @@ public class PlayerSetting : MonoBehaviour
     public PhysicMaterial PhysicsMatCompo { get; protected set; }
 
     public bool IsRelease { get; set; } = false;
-    public bool canShot { get; set; } = true;
+    public bool CanShot { get; set; } = true;
     public bool IsGole { get; set; } = false;
 
     public virtual void Awake()

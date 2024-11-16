@@ -37,7 +37,7 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
 
     private void Update()
     {
-        if(_isHold && _player.canShot)
+        if(_isHold && _player.CanShot)
         {
             Release();
         }
@@ -87,6 +87,8 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
 
     private void Shooting() //카메라가 플레이어 바라보는 방향으로 슛
     {
+        _isHold = false;
+
         Vector3 fixedPos = new Vector3
             (_cam.position.x, _player.transform.position.y, _cam.position.z);
         //카메라 y를 플레이어 y로 변환해 계산해줌
@@ -94,8 +96,6 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
         Vector3 shootDir =(_player.transform.position - fixedPos).normalized;
 
         _player.RigidCompo.velocity = shootDir * shootPower / 3;
-
-        _isHold = false;
 
         stroke++;
         shootPower = 0;

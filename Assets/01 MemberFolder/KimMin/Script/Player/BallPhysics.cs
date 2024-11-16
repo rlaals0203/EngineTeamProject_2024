@@ -18,7 +18,7 @@ public class BallPhysics : MonoBehaviour, IPlayerComponent
 
     private void Update()
     {
-        if (!_player.canShot)
+        if (!_player.CanShot)
             FixedDeceleration(); 
     }
 
@@ -31,7 +31,7 @@ public class BallPhysics : MonoBehaviour, IPlayerComponent
         if (_player.stopPoint >= playerSpeed)
             TryStopBall();
 
-        if (!_isSet && !_player.canShot)
+        if (!_isSet && !_player.CanShot)
             InitializeDeceleration(playerSpeed);
     }
 
@@ -51,16 +51,20 @@ public class BallPhysics : MonoBehaviour, IPlayerComponent
 
     private IEnumerator ShotReadyRoutine()
     {
-        yield return new WaitForSeconds(1f);
-
-        if (_player.RigidCompo.velocity.magnitude <= _player.stopPoint)
+        for (int i = 0; i < 15; i++)
         {
-            _player.stateMachine.ChangeState(StateEnum.Idle);
+            yield return new WaitForSeconds(0.1f);
 
-            if(_isSet)
-                OnShootEndEvent?.Invoke();
-
-            _isSet = false;
+            if (_player.RigidCompo.velocity.magnitude >= _player.stopPoint)
+                yield return null;
         }
+
+        _player.stateMachine.ChangeState(StateEnum.Idle);
+
+        if (_isSet)
+            OnShootEndEvent?.Invoke();
+
+        Debug.Log("ÉP");
+        _isSet = false;
     }
 }
