@@ -9,6 +9,7 @@ public class PlayerSetting : MonoBehaviour
     public float drag = 0.1f;
     public float decelerationPoint = 1.0f;
     public float stopPoint = 0.05f;
+    public float playerVelocity => RigidCompo.velocity.magnitude;
 
     public float startDrag => drag;
 

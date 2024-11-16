@@ -24,7 +24,7 @@ public class HoleManager : MonoBehaviour
     {
         _stageManager._strokes[_currentHole - 1] = stroke;
 
-        Debug.Log($"타수 : {stroke}, {gole.ToString()}");
+        Debug.Log($"타수 : {stroke}, {gole}");
 
         StartCoroutine(HoleInitRoutine());
     }

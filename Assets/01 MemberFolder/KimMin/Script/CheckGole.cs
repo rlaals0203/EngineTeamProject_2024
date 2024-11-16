@@ -29,13 +29,14 @@ public class CheckGole : MonoBehaviour, IPlayerComponent
 
     private Player _player;
     private BallShooting _ballShoot;
-    private string _strokeName;
     private int _par = 5;
 
     public void Initialize(Player player)
     {
         _player = player;
         _ballShoot = _player.GetCompo<BallShooting>();
+
+        _player.GetCompo<BallPhysics>().OnShootEndEvent += HandleOnShotEnd;
 
         #region DictionaryAdd
         strokeDic.Add(GoleEnum.HOLE_IN_ONE, new Color(250, 190, 65, 255));
@@ -54,18 +55,23 @@ public class CheckGole : MonoBehaviour, IPlayerComponent
         #endregion
     }
 
+    private void HandleOnShotEnd()
+    {
+        _player._ballPoints.Add(_player.transform.position);
+    }
+
     private void OnGole()
     {
         if (_player.RigidCompo.velocity == Vector3.zero || _player.IsGole) return;
 
         int par = _ballShoot.stroke > 1 ? _ballShoot.stroke - _par : -100;
-        Debug.Log(par);
         GoleEnum gole = (GoleEnum)par;
 
         OnGoleEvent?.Invoke(_ballShoot.stroke, gole);
 
         _player.StopImmediatly();
         _player.IsGole = true;
+        _player._ballPoints = new List<Vector3>();
 
         _ballShoot.stroke = 0;
     }

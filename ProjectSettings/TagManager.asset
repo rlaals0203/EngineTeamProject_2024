@@ -7,6 +7,7 @@ TagManager:
   - Wall
   - Hole
   - Other
+  - Outbounds
   layers:
   - Default
   - TransparentFX

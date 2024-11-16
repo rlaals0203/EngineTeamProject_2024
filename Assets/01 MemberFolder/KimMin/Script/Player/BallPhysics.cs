@@ -1,7 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class BallPhysics : MonoBehaviour, IPlayerComponent
@@ -12,7 +10,6 @@ public class BallPhysics : MonoBehaviour, IPlayerComponent
     private float _decPoint;
 
     private bool _isSet = false;
-    private bool _isStop = false;
 
     public void Initialize(Player player)
     {
@@ -31,7 +28,7 @@ public class BallPhysics : MonoBehaviour, IPlayerComponent
 
         _player.RigidCompo.drag = playerSpeed >= _decPoint ? _player.startDrag : 1.5f;
 
-        if (playerSpeed <= _player.stopPoint)
+        if (_player.stopPoint >= playerSpeed)
             TryStopBall();
 
         if (!_isSet && !_player.canShot)
@@ -59,7 +56,9 @@ public class BallPhysics : MonoBehaviour, IPlayerComponent
         if (_player.RigidCompo.velocity.magnitude <= _player.stopPoint)
         {
             _player.stateMachine.ChangeState(StateEnum.Idle);
-            OnShootEndEvent?.Invoke();
+
+            if(_isSet)
+                OnShootEndEvent?.Invoke();
 
             _isSet = false;
         }

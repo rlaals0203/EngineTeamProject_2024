@@ -24,8 +24,6 @@ public class StrokePopup : MonoBehaviour
         _popUpText.color = col;
         _popUpText.text = gole.ToString();
 
-        Debug.Log(col);
-
         _sequence
             .Append(_popUpText.transform.DOScale(1.5f, 0.5f))
             .AppendInterval(0.5f)
