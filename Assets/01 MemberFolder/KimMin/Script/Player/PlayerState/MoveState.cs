@@ -11,12 +11,11 @@ public class MoveState : State
 
     public override void EnterState()
     {
-        _player.canShot = false;
+        _player.CanShot = false;
         _player.IsRelease = false;
     }
 
     public override void UpdateState()
     {
-
     }
 }

@@ -32,8 +32,7 @@ public class ShootBar : MonoBehaviour
             ChangeSlider();
             ActiveObjects(true);
         }
-        else
-            ActiveObjects(false);
+        else ActiveObjects(false);
     }
 
     private void ChangeSlider()

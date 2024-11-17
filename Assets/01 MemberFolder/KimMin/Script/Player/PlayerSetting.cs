@@ -9,6 +9,7 @@ public class PlayerSetting : MonoBehaviour
     public float drag = 0.1f;
     public float decelerationPoint = 1.0f;
     public float stopPoint = 0.05f;
+    public float playerVelocity => RigidCompo.velocity.magnitude;
 
     public float startDrag => drag;
 
@@ -16,7 +17,8 @@ public class PlayerSetting : MonoBehaviour
     public PhysicMaterial PhysicsMatCompo { get; protected set; }
 
     public bool IsRelease { get; set; } = false;
-    public bool canShot { get; set; } = true;
+    public bool CanShot { get; set; } = true;
+    public bool IsGole { get; set; } = false;
 
     public virtual void Awake()
     {

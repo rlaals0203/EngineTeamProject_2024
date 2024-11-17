@@ -1,7 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class BallPhysics : MonoBehaviour, IPlayerComponent
@@ -9,12 +7,9 @@ public class BallPhysics : MonoBehaviour, IPlayerComponent
     public event Action OnShootEndEvent;
 
     private Player _player;
-    private float _decelerationPoint;
-    private float playerSpeed;
+    private float _decPoint;
 
     private bool _isSet = false;
-    private bool _isDecelerate = false;
-    private bool _isStop = false;
 
     public void Initialize(Player player)
     {
@@ -23,75 +18,55 @@ public class BallPhysics : MonoBehaviour, IPlayerComponent
 
     private void Update()
     {
-        if (!_player.canShot)
+        if (!_player.CanShot)
             FixedDeceleration(); 
     }
 
     private void FixedDeceleration()
     {
-        playerSpeed = _player.RigidCompo.velocity.magnitude;
+        float playerSpeed = _player.RigidCompo.velocity.magnitude;
 
-        if (_isDecelerate && playerSpeed >= _decelerationPoint)
-        {
-            _player.RigidCompo.drag = _player.startDrag;
-            _isDecelerate = false;
-        }
-        else if (playerSpeed <= _decelerationPoint && !_isDecelerate)
-        {
-            _player.RigidCompo.drag = 1.5f;
-            _isDecelerate = true;
-        }
-        else if (playerSpeed <= _player.stopPoint && !_isStop)
-        {
-            if (_isStop) return;
-            StopBall();
-        }
-    }
+        _player.RigidCompo.drag = playerSpeed >= _decPoint ? _player.startDrag : 1.5f;
 
-    private void LateUpdate()
-    {
-        if (!_isSet && !_player.canShot)
+        if (_player.stopPoint >= playerSpeed)
+            TryStopBall();
+
+        if (!_isSet && !_player.CanShot)
             InitializeDeceleration(playerSpeed);
     }
 
     private void InitializeDeceleration(float speed)
     {
-        _decelerationPoint = speed / 10;
+        _decPoint = speed / 5;
         _isSet = true;
     }
 
-    private void StopBall()
+    private void TryStopBall()
     {
         _player.RigidCompo.velocity = Vector3.zero;
         _player.RigidCompo.drag = _player.startDrag;
 
-        _isStop = true;
-        _isSet = false;
-
         StartCoroutine(ShotReadyRoutine());
-
-        Debug.Log("c");
     }
 
     private IEnumerator ShotReadyRoutine()
     {
-        if (!_isStop || !_isDecelerate) yield return null;
+        for (int i = 0; i < 15; i++)
+        {
+            yield return new WaitForSeconds(0.1f);
 
-        yield return new WaitForSeconds(1f);
+            if (_player.RigidCompo.velocity.magnitude >= _player.stopPoint)
+                yield return null;
+        }
 
         if (_player.RigidCompo.velocity == Vector3.zero)
         {
             _player.stateMachine.ChangeState(StateEnum.Idle);
-            _isDecelerate = false;
-            _isStop = false;
 
-            OnShootEndEvent?.Invoke();
+            if (_isSet)
+                OnShootEndEvent?.Invoke();
+
+            _isSet = false;
         }
     }
-
-/*    private void OnCollisionEnter(Collision collision)
-    {
-        _player.RigidCompo.velocity = new Vector3(_player.RigidCompo.velocity.x, 0f, 
-                _player.RigidCompo.velocity.z);
-    }*/
 }

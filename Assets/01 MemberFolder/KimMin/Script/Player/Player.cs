@@ -13,6 +13,7 @@ public class Player : PlayerSetting
 {
     private Dictionary<Type, IPlayerComponent> _components;
     public StateMachine stateMachine;
+    public List<Vector3> ballPoints;
 
     public override void Awake()
     {
@@ -44,5 +45,10 @@ public class Player : PlayerSetting
             return component as T;
         }
         return default;
+    }
+
+    public void StopImmediatly()
+    {
+        RigidCompo.velocity = Vector3.zero;
     }
 }
