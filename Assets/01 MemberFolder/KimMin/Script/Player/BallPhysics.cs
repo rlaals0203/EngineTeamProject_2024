@@ -59,12 +59,14 @@ public class BallPhysics : MonoBehaviour, IPlayerComponent
                 yield return null;
         }
 
-        _player.stateMachine.ChangeState(StateEnum.Idle);
+        if (_player.RigidCompo.velocity == Vector3.zero)
+        {
+            _player.stateMachine.ChangeState(StateEnum.Idle);
 
-        if (_isSet)
-            OnShootEndEvent?.Invoke();
+            if (_isSet)
+                OnShootEndEvent?.Invoke();
 
-        Debug.Log("ÉP");
-        _isSet = false;
+            _isSet = false;
+        }
     }
 }

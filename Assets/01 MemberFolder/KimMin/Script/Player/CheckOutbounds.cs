@@ -1,6 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class CheckOutbounds : IPlayerComponent
+public class CheckOutbounds : MonoBehaviour, IPlayerComponent
 {
     private Player _player;
     public LayerMask whatIsOutbounds;
@@ -8,15 +10,14 @@ public class CheckOutbounds : IPlayerComponent
     public void Initialize(Player player)
     {
         _player = player;
-
-        _player.GetCompo<BallPhysics>().OnShootEndEvent += HandleShootEnd;
     }
 
-    private void HandleShootEnd()
+    private void OnCollisionEnter(Collision collision)
     {
-        if (Physics.Raycast(_player.transform.position, Vector3.down, 0.5f, whatIsOutbounds))
+        if (collision.gameObject.CompareTag("Outbounds"))
         {
-            Debug.Log("¾Æ¿ô");
+            _player.transform.position = _player.ballPoints[^1];
+            _player.RigidCompo.velocity = Vector2.zero;
         }
     }
 }

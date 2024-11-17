@@ -57,7 +57,7 @@ public class CheckGole : MonoBehaviour, IPlayerComponent
 
     private void HandleOnShotEnd()
     {
-        _player._ballPoints.Add(_player.transform.position);
+        _player.ballPoints.Add(_player.transform.position);
     }
 
     private void OnGole()
@@ -71,7 +71,7 @@ public class CheckGole : MonoBehaviour, IPlayerComponent
 
         _player.StopImmediatly();
         _player.IsGole = true;
-        _player._ballPoints = new List<Vector3>();
+        _player.ballPoints = new List<Vector3>();
 
         _ballShoot.stroke = 0;
     }
