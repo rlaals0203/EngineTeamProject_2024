@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/00_Scenes/KimMin.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/00_Scenes/MainScene/Map/Forest.unity
+    guid: 36162fcb68be6a34ea5bf0d99eddfaea
   m_configObjects: {}
