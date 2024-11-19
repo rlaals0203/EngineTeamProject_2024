@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,6 +32,8 @@ public class CheckOutbounds : MonoBehaviour, IPlayerComponent
     {
         if (collision.gameObject.CompareTag("Outbounds"))
         {
+            if(_player.ballPoints.Count < 1) return;
+
             _player.transform.position = _player.ballPoints[^1];
             _player.RigidCompo.velocity = Vector2.zero;
         }

@@ -2,6 +2,7 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class HoleManager : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class HoleManager : MonoBehaviour
         _checkGole.OnGoleEvent += HandleGole;
 
         _currentHole = 1;
+        InitializeStage(_currentHole);
     }
 
     private void HandleGole(int stroke, GoleEnum gole)
@@ -31,11 +33,12 @@ public class HoleManager : MonoBehaviour
 
     public void InitializeStage(int hole)
     {
-        _stageManager.player.transform.position = _stageManager.testMaps[hole - 1]
+        _stageManager.player.transform.position = _stageManager.map[hole - 1]
                             .transform.Find("End")
                             .transform.Find("StartPos").position;
 
         _stageManager.player.IsGole = false;
+        _stageManager.player.ballPoints.Clear();
     }
 
     private IEnumerator HoleInitRoutine()
