@@ -71,7 +71,6 @@ public class CheckGole : MonoBehaviour, IPlayerComponent
 
         _player.StopImmediatly();
         _player.IsGole = true;
-        _player.ballPoints = new List<Vector3>();
 
         _ballShoot.stroke = 0;
     }

@@ -2,6 +2,7 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class HoleManager : MonoBehaviour
 {
@@ -36,6 +37,7 @@ public class HoleManager : MonoBehaviour
                             .transform.Find("StartPos").position;
 
         _stageManager.player.IsGole = false;
+        _stageManager.player.ballPoints.Clear();
     }
 
     private IEnumerator HoleInitRoutine()
