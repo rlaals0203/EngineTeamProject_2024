@@ -1516,7 +1516,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7678516743712702951}
   m_Layer: 0
-  m_Name: End_01
+  m_Name: End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

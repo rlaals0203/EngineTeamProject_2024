@@ -17,7 +17,7 @@ public class StageManager : MonoBehaviour
 
     public Player player;
     public CinemachineFreeLook freeLook;
-    public GameObject[] testMaps;
+    public GameObject[] map;
 
     public Dictionary<StageEnum, GameObject[,]> MapDic = new 
         Dictionary<StageEnum, GameObject[,]>();
