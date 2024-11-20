@@ -10,6 +10,7 @@ using UnityEngine.UI;
 public class BallShooting : MonoBehaviour, IPlayerComponent
 {
     public event Action OnShootEvent;
+    public event Action OnGutterEvent;
 
     [SerializeField] private float _powerSensivity = 20f;
     [Range(0, 100f)] public float shootPower;
@@ -100,5 +101,8 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
         stroke++;
         shootPower = 0;
         OnShootEvent?.Invoke();
+
+        if (stroke > 12)
+            OnGutterEvent?.Invoke();
     }
 }

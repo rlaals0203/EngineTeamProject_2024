@@ -17,6 +17,13 @@ public class LeaderBoard : MonoBehaviour
     {
         _leaderBoard.gameObject.SetActive(false);
         _holeManager._checkGole.OnGoleEvent += HandleOnGole;
+        _holeManager._stageManager.player.GetCompo<BallShooting>()
+            .OnGutterEvent += HandleGutter;
+    }
+
+    private void HandleGutter()
+    {
+        _strokeTexts[_holeManager._currentHole - 1].text = "-";
     }
 
     private void HandleOnGole(int stroke, GoleEnum gole)
