@@ -10,7 +10,6 @@ using UnityEngine.UI;
 public class BallShooting : MonoBehaviour, IPlayerComponent
 {
     public event Action OnShootEvent;
-    public event Action OnGutterEvent;
 
     [SerializeField] private float _powerSensivity = 20f;
     [Range(0, 100f)] public float shootPower;
@@ -38,16 +37,15 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
 
     private void Update()
     {
-        if(_isHold && _player.CanShot)
-        {
-            Release();
-        }
+        if(_isHold && _player.CanShot && !_player.IsGole) Release();
 
-        if (Input.GetMouseButtonDown(0))
+        if (Mouse.current.leftButton.isPressed)
         {
             if (!_isCancel)
                 _isHold = true;
         }
+        else
+            _isHold = false;
 
         if (Mouse.current.leftButton.wasReleasedThisFrame) _isCancel = false;
     }
@@ -101,8 +99,5 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
         stroke++;
         shootPower = 0;
         OnShootEvent?.Invoke();
-
-        if (stroke > 12)
-            OnGutterEvent?.Invoke();
     }
 }

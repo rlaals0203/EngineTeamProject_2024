@@ -7,6 +7,8 @@ public class BallPhysics : MonoBehaviour, IPlayerComponent
     public event Action OnShootEndEvent;
 
     private Player _player;
+    private BallShooting _ballShooting;
+    private CheckGole _checkGole;
     private float _decPoint;
 
     private bool _isSet = false;
@@ -14,6 +16,8 @@ public class BallPhysics : MonoBehaviour, IPlayerComponent
     public void Initialize(Player player)
     {
         _player = player;
+        _ballShooting = _player.GetCompo<BallShooting>();
+        _checkGole = _player.GetCompo<CheckGole>();
     }
 
     private void Update()
@@ -66,7 +70,11 @@ public class BallPhysics : MonoBehaviour, IPlayerComponent
             if (_isSet)
                 OnShootEndEvent?.Invoke();
 
+            if (_ballShooting.stroke > 12 && _isSet)
+                _checkGole.OnGole(true);
+
             _isSet = false;
+
         }
     }
 }

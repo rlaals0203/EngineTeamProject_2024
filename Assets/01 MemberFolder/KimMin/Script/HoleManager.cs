@@ -3,7 +3,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class HoleManager : MonoBehaviour
 {
@@ -15,19 +14,12 @@ public class HoleManager : MonoBehaviour
     private void Awake()
     {
         _stageManager = GetComponent<StageManager>();
-        _stageManager.player.GetCompo<BallShooting>().OnGutterEvent += HandleGutter;
         _checkGole = _stageManager.player.GetComponent<CheckGole>();
 
         _checkGole.OnGoleEvent += HandleGole;
 
         _currentHole = 1;
         InitializeStage(_currentHole);
-    }
-
-    private void HandleGutter()
-    {
-        _stageManager._strokes[_currentHole] = 13;
-        StartCoroutine(HoleInitRoutine());
     }
 
     private void HandleGole(int stroke, GoleEnum gole)

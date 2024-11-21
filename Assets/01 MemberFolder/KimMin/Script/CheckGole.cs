@@ -18,7 +18,8 @@ public enum GoleEnum
     QUADRUPLE_BOGEY = 4,
     QUINTUPLE_BOGEY = 5,
     SEXTUPLE_BOGEY = 6,
-    SEPTUPLE_BOGEY = 7
+    SEPTUPLE_BOGEY = 7,
+    GUTTER = 13
 }
 
 public class CheckGole : MonoBehaviour, IPlayerComponent
@@ -52,6 +53,7 @@ public class CheckGole : MonoBehaviour, IPlayerComponent
         strokeDic.Add(GoleEnum.QUINTUPLE_BOGEY, new Color(100, 100, 100, 255));
         strokeDic.Add(GoleEnum.SEXTUPLE_BOGEY, new Color(75, 75, 75, 255));
         strokeDic.Add(GoleEnum.SEPTUPLE_BOGEY, new Color(50, 50, 50, 255));
+        strokeDic.Add(GoleEnum.GUTTER, new Color(30, 30, 30, 255));
         #endregion
     }
 
@@ -60,14 +62,18 @@ public class CheckGole : MonoBehaviour, IPlayerComponent
         _player.ballPoints.Add(_player.transform.position);
     }
 
-    private void OnGole()
+    public void OnGole(bool isGutter)
     {
-        if (_player.RigidCompo.velocity == Vector3.zero || _player.IsGole) return;
+        if (_player.IsGole) return;
 
         int par = _ballShoot.stroke > 1 ? _ballShoot.stroke - _par : -100;
         GoleEnum gole = (GoleEnum)par;
 
-        OnGoleEvent?.Invoke(_ballShoot.stroke, gole);
+
+        if (isGutter)
+            OnGoleEvent?.Invoke(13, GoleEnum.GUTTER);
+        else
+            OnGoleEvent?.Invoke(_ballShoot.stroke, gole);
 
         _player.StopImmediatly();
         _player.IsGole = true;
@@ -79,7 +85,7 @@ public class CheckGole : MonoBehaviour, IPlayerComponent
     {
         if (other.CompareTag("Hole"))
         {
-            OnGole();
+            OnGole(false);
         }
     }
 }

@@ -9,7 +9,7 @@ public class LeaderBoard : MonoBehaviour
     [SerializeField] private HoleManager _holeManager;
     [SerializeField] private GameObject _leaderBoard;
     [SerializeField] private TextMeshProUGUI[] _strokeTexts 
-        = new TextMeshProUGUI[9];
+        = new TextMeshProUGUI[12];
 
     private bool _isOpened = false;
 
@@ -17,18 +17,14 @@ public class LeaderBoard : MonoBehaviour
     {
         _leaderBoard.gameObject.SetActive(false);
         _holeManager._checkGole.OnGoleEvent += HandleOnGole;
-        _holeManager._stageManager.player.GetCompo<BallShooting>()
-            .OnGutterEvent += HandleGutter;
-    }
-
-    private void HandleGutter()
-    {
-        _strokeTexts[_holeManager._currentHole - 1].text = "-";
     }
 
     private void HandleOnGole(int stroke, GoleEnum gole)
     {
-        _strokeTexts[_holeManager._currentHole - 1].text = stroke.ToString();
+        if (gole == GoleEnum.GUTTER)
+            _strokeTexts[_holeManager._currentHole - 1].text = "-";
+        else
+            _strokeTexts[_holeManager._currentHole - 1].text = stroke.ToString();
     }
 
     private void Update()
