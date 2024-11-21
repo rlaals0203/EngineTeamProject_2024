@@ -31,6 +31,7 @@ public class Timer : MonoBehaviour
     {
         _isRunning = false;
         _time = _startTime;
+        _timerTxt.text = $"{_startTime}√ ";
         _timerTxt.transform.DOLocalMoveY(10f, 0.5f).SetEase(Ease.OutExpo);
     }
 

@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class HoleManager : MonoBehaviour
 {
+    public event Action OnStageInitEvent;
+
     public float timeToReady = 4.0f;
     public int _currentHole;
     public CheckGole _checkGole;
@@ -39,6 +41,7 @@ public class HoleManager : MonoBehaviour
 
         _stageManager.player.IsGole = false;
         _stageManager.player.ballPoints.Clear();
+        OnStageInitEvent?.Invoke();
     }
 
     private IEnumerator HoleInitRoutine()
