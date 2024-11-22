@@ -50,7 +50,7 @@ public class BallPhysics : MonoBehaviour, IPlayerComponent
         _player.RigidCompo.velocity = Vector3.zero;
         _player.RigidCompo.drag = _player.startDrag;
 
-        StartCoroutine(ShotReadyRoutine());
+        if (!_player.IsSlope) StartCoroutine(ShotReadyRoutine());
     }
 
     private IEnumerator ShotReadyRoutine()
@@ -60,21 +60,18 @@ public class BallPhysics : MonoBehaviour, IPlayerComponent
             yield return new WaitForSeconds(0.1f);
 
             if (_player.RigidCompo.velocity.magnitude >= _player.stopPoint)
-                yield return null;
+                yield break;
         }
 
         if (_player.RigidCompo.velocity == Vector3.zero)
         {
-            _player.stateMachine.ChangeState(StateEnum.Idle);
-
-            if (_isSet)
-                OnShootEndEvent?.Invoke();
+            if (_isSet) OnShootEndEvent?.Invoke();
 
             if (_ballShooting.stroke > 12 && _isSet)
                 _checkGole.OnGole(true);
 
             _isSet = false;
-
+            _player.stateMachine.ChangeState(StateEnum.Idle);
         }
     }
 }
