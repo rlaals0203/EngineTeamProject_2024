@@ -5,12 +5,23 @@ using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
+    public static SoundManager instance;
     [SerializeField] private Slider _bgmVolumeSlider;
 
     private AudioSource _audioSource;
 
     private void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         _audioSource = GetComponent<AudioSource>();
     }
 

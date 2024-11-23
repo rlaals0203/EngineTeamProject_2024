@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class SettingWindow : MonoBehaviour
 {
     [SerializeField] private GameObject _bgPanel;
+    [SerializeField] private GameObject _dontClick;
 
     private Image _settingPanel;
 
@@ -23,7 +24,7 @@ public class SettingWindow : MonoBehaviour
 
     private void Start()
     {
-        _bgPanel.SetActive(false);
+        _dontClick.SetActive(false);
         DOTween.Init();
         _oldPosition = _settingPanel.rectTransform.position.y;
     }
@@ -45,15 +46,17 @@ public class SettingWindow : MonoBehaviour
 
     private void DownPanel()
     {
-        _bgPanel.SetActive(true);
+        _dontClick.SetActive(true);
         sequence = DOTween.Sequence();
         sequence.Append(_settingPanel.rectTransform.DOLocalMoveY(0, 1));
         sequence.AppendCallback(() => _isMove = true);
+        //sequence.AppendCallback(() => Time.timeScale = 0);
     }
 
     private void UpPanel()
     {
-        _bgPanel.SetActive(false);
+        //Time.timeScale = 1;
+        _dontClick.SetActive(false);
         sequence = DOTween.Sequence();
         sequence.Append(_settingPanel.rectTransform.DOMoveY(_oldPosition, 1));
         sequence.AppendCallback(() => _isMove = false);
@@ -73,6 +76,6 @@ public class SettingWindow : MonoBehaviour
 
     public void returnTitle()
     {
-        SceneManager.LoadScene("TestTitle");
+        SceneManager.LoadScene("Title");
     }
 }
