@@ -18,7 +18,7 @@ public class SettingWindow : MonoBehaviour
 
     private void Awake()
     {
-        _settingPanel = GetComponent<Image>();
+        _settingPanel = _bgPanel.GetComponent<Image>();
     }
 
     private void Start()
