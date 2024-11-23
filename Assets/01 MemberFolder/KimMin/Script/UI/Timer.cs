@@ -52,5 +52,8 @@ public class Timer : MonoBehaviour
             _time -= Time.deltaTime;
             _timerTxt.text = $"{Mathf.RoundToInt(_time)}√ ";
         }
+
+        if(_time < 0)
+            _checkGole.OnGole(true);
     }
 }
