@@ -7,11 +7,14 @@ using UnityEngine;
 public class HoleManager : MonoBehaviour
 {
     public event Action OnStageInitEvent;
+    public event Action OnGameEndEvent;
 
     public float timeToReady = 4.0f;
     public int _currentHole;
     public CheckGole _checkGole;
     public StageManager _stageManager;
+
+    private Vector3 nextPos;
 
     private void Awake()
     {
@@ -35,10 +38,14 @@ public class HoleManager : MonoBehaviour
 
     public void InitializeStage(int hole)
     {
-        _stageManager.player.transform.position = _stageManager.map[hole - 1]
-                            .transform.Find("End")
-                            .transform.Find("StartPos").position;
+        if (hole > 12)
+        {
+            GameEnd();
+            OnGameEndEvent?.Invoke();
+            return;
+        }
 
+        _stageManager.player.transform.position = nextPos;
         _stageManager.player.IsGole = false;
         _stageManager.player.ballPoints.Clear();
         OnStageInitEvent?.Invoke();
@@ -46,7 +53,16 @@ public class HoleManager : MonoBehaviour
 
     private IEnumerator HoleInitRoutine()
     {
+        nextPos = _stageManager.map[_currentHole]
+                    .transform.Find("End")
+                    .transform.Find("StartPos").position;
+
         yield return new WaitForSeconds(timeToReady);
         InitializeStage(++_currentHole);
+    }
+
+    public void GameEnd()
+    {
+        Debug.Log("∞‘¿” ≥°");
     }
 }
