@@ -6,12 +6,17 @@ using DG.Tweening;
 public class SpinGimic : MonoBehaviour
 {
     [SerializeField] private float _speed;
-    private float _time;
+    private float _currentRot;
+
+    private void Awake()
+    {
+        _currentRot = transform.rotation.y * _speed;
+    }
 
     private void Update()
     {
-        _time += Time.deltaTime * _speed;
+        _currentRot += Time.deltaTime * _speed;
 
-        transform.rotation = Quaternion.Euler(0, _time, 0);
+        transform.rotation = Quaternion.Euler(0, _currentRot, 0);
     }
 }

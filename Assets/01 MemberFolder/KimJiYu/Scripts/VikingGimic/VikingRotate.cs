@@ -18,6 +18,6 @@ public class VikingRotate : MonoBehaviour
 
     private void Viking()
     {
-        transform.DORotate(new Vector3(45, 0, 0), _swingTime).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine);
+        transform.DOLocalRotate(new Vector3(45, 0, 0), _swingTime).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine);
     }
 }
