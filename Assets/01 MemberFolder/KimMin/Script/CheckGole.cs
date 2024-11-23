@@ -57,6 +57,14 @@ public class CheckGole : MonoBehaviour, IPlayerComponent
         #endregion
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            OnGole(false);
+        }
+    }
+
     private void HandleOnShotEnd()
     {
         _player.ballPoints.Add(_player.transform.position);

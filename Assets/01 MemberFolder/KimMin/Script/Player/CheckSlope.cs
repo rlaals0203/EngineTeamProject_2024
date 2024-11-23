@@ -37,7 +37,8 @@ public class CheckSlope : MonoBehaviour, IPlayerComponent
             {
                 _player.IsSlope = false;
                 _player.RigidCompo.velocity = new Vector3(
-                    _player.RigidCompo.velocity.x, 0,
+                    _player.RigidCompo.velocity.x,
+                    _player.RigidCompo.velocity.y / 2,
                     _player.RigidCompo.velocity.z);
             }
         }

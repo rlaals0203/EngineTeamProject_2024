@@ -23,7 +23,7 @@ public class BallPhysics : MonoBehaviour, IPlayerComponent
     private void Update()
     {
         if (!_player.CanShot)
-            FixedDeceleration(); 
+            FixedDeceleration();
     }
 
     private void FixedDeceleration()

@@ -94,7 +94,10 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
 
         Vector3 shootDir =(_player.transform.position - fixedPos).normalized;
 
-        _player.RigidCompo.velocity = shootDir * shootPower / 3;
+        if (shootPower < 25)
+            shootPower /= 2;
+
+        _player.RigidCompo.velocity = shootDir * shootPower / 4;
 
         stroke++;
         shootPower = 0;
