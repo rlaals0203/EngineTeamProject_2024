@@ -20414,14 +20414,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 0.38993704, g: 0.38993704, b: 0.38993704, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: e73ddd399d7cd4749a5a3d28058dc062, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -30526,7 +30526,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5864673073218920002}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0000000032510683, y: 0.9819564, z: -0.18910751, w: 0.000000016881438}
+  m_LocalRotation: {x: -0.000000003253857, y: 0.9819564, z: -0.18910751, w: -0.00000001689592}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -30547,7 +30547,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToReady: 4
-  _currentHole: 0
+  _currentHole: 12
   _checkGole: {fileID: 4187776397693501261}
   _stageManager: {fileID: 9010191946251366440}
 --- !u!120 &2401464041514503084
@@ -34015,7 +34015,7 @@ GameObject:
   - component: {fileID: 2300266592964102370}
   - component: {fileID: 9010191946251366441}
   m_Layer: 0
-  m_Name: Stagemanager
+  m_Name: StageManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34199,8 +34199,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b18c8f664702fb74989a33c36e83a944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2527896021485922492}
-  freeLook: {fileID: 4142773759972593061}
   map:
   - {fileID: 644587044}
   - {fileID: 1616032820}
@@ -34214,8 +34212,26 @@ MonoBehaviour:
   - {fileID: 735836969}
   - {fileID: 1289776597}
   - {fileID: 2005433649}
-  _strokes: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  _pars: 050000000500000005000000050000000500000005000000050000000500000005000000050000000500000005000000
+  mapParent: {fileID: 1477246070}
+  player: {fileID: 2527896021485922492}
+  freeLook: {fileID: 4142773759972593061}
+  holeTime:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  strokes: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  pars: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  totalTime: 0
+  totalStroke: 0
 --- !u!114 &9010191946251366441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34355,7 +34371,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb97b25482d1d9241b9ddd26b2f6993b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ballShooting: {fileID: 3434542482871444372}
+  _holeManager: {fileID: 2300266592964102370}
   _checkGole: {fileID: 4187776397693501261}
   _time: 90
 --- !u!1 &9221703420594619847

@@ -2,6 +2,8 @@ using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class HoleManager : MonoBehaviour
@@ -23,6 +25,17 @@ public class HoleManager : MonoBehaviour
 
         _checkGole.OnGoleEvent += HandleGole;
 
+        Initialize();
+    }
+
+    private void Initialize()
+    {
+        for(int i = 0; i < _stageManager.strokes.Length; i++)
+        {
+            _stageManager.map[i] = _stageManager.mapParent.transform.Find($"Stage-{i + 1}").gameObject;
+            _stageManager.strokes[i] = 13;
+        }
+
         _currentHole = 1;
         InitializeStage(_currentHole);
     }
@@ -35,9 +48,7 @@ public class HoleManager : MonoBehaviour
             return;
         }
 
-        _stageManager._strokes[_currentHole - 1] = stroke;
-
-        Debug.Log($"Å¸¼ö : {stroke}, {gole}");
+        _stageManager.strokes[_currentHole - 1] = stroke;
 
         StartCoroutine(HoleInitRoutine());
     }
@@ -62,6 +73,9 @@ public class HoleManager : MonoBehaviour
 
     private IEnumerator GameEndRoutine()
     {
+        _stageManager.strokes.ToList().ForEach(x => _stageManager.totalStroke += x);
+        _stageManager.holeTime.ToList().ForEach(x => _stageManager.totalTime += x);
+
         yield return new WaitForSeconds(timeToReady);
         OnGameEndEvent?.Invoke();
     }
