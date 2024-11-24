@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
-    [SerializeField] private BallShooting _ballShooting;
+    [SerializeField] private HoleManager _holeManager;
     [SerializeField] private CheckGole _checkGole;
     [SerializeField] private float _time;
 
@@ -21,15 +21,18 @@ public class Timer : MonoBehaviour
     {
         _timerTxt = GetComponentInChildren<TextMeshProUGUI>();
 
-        _ballShooting.OnShootEvent += HandleOnShoot;
+        _holeManager._stageManager.player.GetComponent<BallShooting>()
+            .OnShootEvent += HandleOnShoot;
+
         _checkGole.OnGoleEvent += HandleOnGole;
 
         _startTime = _time;
     }
 
-    private void HandleOnGole(int arg1, GoleEnum @enum)
+    private void HandleOnGole(int arg1, GoleEnum goleEnum)
     {
         _isRunning = false;
+        _holeManager._stageManager.holeTime[_holeManager._currentHole - 1] = _startTime - _time;
         _time = _startTime;
         _timerTxt.text = $"{_startTime}√ ";
         _timerTxt.transform.DOLocalMoveY(10f, 0.5f).SetEase(Ease.OutExpo);

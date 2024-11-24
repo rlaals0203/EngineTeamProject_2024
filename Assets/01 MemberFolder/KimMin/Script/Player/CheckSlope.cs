@@ -24,8 +24,6 @@ public class CheckSlope : MonoBehaviour, IPlayerComponent
         Vector3 ray = transform.position + Vector3.down * 0.1f;
         if (Physics.Raycast(ray, Vector3.down, out hit, raySize))
         {
-            Vector3 surface = hit.normal;
-
             float angle = Vector3.Angle(hit.normal, Vector3.up);
 
             if (angle > slopeThreshold)
@@ -36,9 +34,10 @@ public class CheckSlope : MonoBehaviour, IPlayerComponent
             else
             {
                 _player.IsSlope = false;
+
                 _player.RigidCompo.velocity = new Vector3(
                     _player.RigidCompo.velocity.x,
-                    _player.RigidCompo.velocity.y / 2,
+                    _player.RigidCompo.velocity.y / 1.5f,
                     _player.RigidCompo.velocity.z);
             }
         }
