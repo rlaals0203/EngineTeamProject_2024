@@ -8,14 +8,13 @@ public class BlindTrigger : MonoBehaviour
     [SerializeField] private Image[] _blindImage;
     private int _rand = 0;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider collision)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
             _rand = Random.Range(0, _blindImage.Length);
 
             _blindImage[_rand].DOFade(1, 0.25f);
-
             StartCoroutine(DisableBlind());
         }
     }

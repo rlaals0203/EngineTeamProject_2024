@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SoundManager : MonoBehaviour
+public class BGSoundManager : MonoBehaviour
 {
-    public static SoundManager instance;
+    public static BGSoundManager instance;
     [SerializeField] private Slider _bgmVolumeSlider;
 
     private AudioSource _audioSource;
