@@ -30,7 +30,16 @@ public class HoleManager : MonoBehaviour
 
     private void Initialize()
     {
-        for(int i = 0; i < _stageManager.strokes.Length; i++)
+        _stageManager.strokeNameDic.Clear();
+
+        _stageManager.strokeNameDic.Add(GoleEnum.HOLE_IN_ONE, 0);
+        _stageManager.strokeNameDic.Add(GoleEnum.CONDOR, 0);
+        _stageManager.strokeNameDic.Add(GoleEnum.ALBATROSS, 0);
+        _stageManager.strokeNameDic.Add(GoleEnum.EAGLE, 0);
+        _stageManager.strokeNameDic.Add(GoleEnum.BIRDIE, 0);
+        _stageManager.strokeNameDic.Add(GoleEnum.PAR, 0);
+
+        for (int i = 0; i < _stageManager.strokes.Length; i++)
         {
             _stageManager.map[i] = _stageManager.mapParent.transform.Find($"Stage-{i + 1}").gameObject;
             _stageManager.strokes[i] = 13;
