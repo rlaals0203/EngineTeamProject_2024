@@ -29,6 +29,8 @@ public class CheckGole : MonoBehaviour, IPlayerComponent
     public Dictionary<GoleEnum, Color> strokeDic = new Dictionary<GoleEnum, Color>();
 
     [SerializeField] private GameObject _effect;
+    [SerializeField] private StageManager _stageManager;
+
     private Player _player;
     private BallShooting _ballShoot;
     private int _par = 5;
@@ -86,6 +88,9 @@ public class CheckGole : MonoBehaviour, IPlayerComponent
             Instantiate(_effect, _player.transform.position, Quaternion.Euler(-90, 0, 0));
             OnGoleEvent?.Invoke(_ballShoot.stroke, gole);
         }
+
+        if (_ballShoot.stroke <= 5)
+            _stageManager.strokeNameDic[gole]++;
 
         _player.StopImmediatly();
         _player.IsGole = true;

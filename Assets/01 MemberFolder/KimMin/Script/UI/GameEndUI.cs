@@ -46,7 +46,13 @@ public class GameEndUI : MonoBehaviour
         _strokeTxt.text = $"타수\n{_stageManager.totalStroke}";
         _timeTxt.text = $"플레이 시간\n{Mathf.RoundToInt(_stageManager.totalTime)}";
 
-        Debug.Log("입갤");
+        _hioTxt.text = _stageManager.strokeNameDic[GoleEnum.HOLE_IN_ONE].ToString();
+        _condorTxt.text = _stageManager.strokeNameDic[GoleEnum.CONDOR].ToString();
+        _albTxt.text = _stageManager.strokeNameDic[GoleEnum.ALBATROSS].ToString();
+        _eagleTxt.text = _stageManager.strokeNameDic[GoleEnum.EAGLE].ToString();
+        _birdieTxt.text = _stageManager.strokeNameDic[GoleEnum.BIRDIE].ToString();
+        _parTxt.text = _stageManager.strokeNameDic[GoleEnum.PAR].ToString();
+
 
         seq.Append(_titleTxt.transform.parent.DOMoveY(100, 2f)
             .SetEase(Ease.InOutBack))
@@ -79,6 +85,10 @@ public class GameEndUI : MonoBehaviour
         seq2.Append(_element.transform.DOMoveY(3000, 1.5f))
             .SetEase(Ease.InOutBack)
             .Append(_background.DOColor(Color.white, 1f))
-            .AppendCallback(() => SceneManager.LoadScene("Title"));
+            .OnComplete(() =>
+            {
+                Debug.Log("아아");
+                SceneManager.LoadScene("Title");
+            });
     }
 }

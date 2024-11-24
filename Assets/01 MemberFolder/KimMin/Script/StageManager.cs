@@ -23,6 +23,9 @@ public class StageManager : MonoBehaviour
     public Dictionary<StageEnum, GameObject[,]> MapDic = new 
         Dictionary<StageEnum, GameObject[,]>();
 
+    public Dictionary<GoleEnum, int> strokeNameDic = 
+        new Dictionary<GoleEnum, int>();
+
     public float[] holeTime = new float[12];
     public int[] strokes = new int[12];
     public int[] pars = new int[12];
