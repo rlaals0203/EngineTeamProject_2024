@@ -29,6 +29,12 @@ public class HoleManager : MonoBehaviour
 
     private void HandleGole(int stroke, GoleEnum gole)
     {
+        if (_currentHole >= 12)
+        {
+            StartCoroutine(GameEndRoutine());
+            return;
+        }
+
         _stageManager._strokes[_currentHole - 1] = stroke;
 
         Debug.Log($"타수 : {stroke}, {gole}");
@@ -38,13 +44,6 @@ public class HoleManager : MonoBehaviour
 
     public void InitializeStage(int hole)
     {
-        if (hole > 12)
-        {
-            GameEnd();
-            OnGameEndEvent?.Invoke();
-            return;
-        }
-
         _stageManager.player.transform.position = nextPos;
         _stageManager.player.IsGole = false;
         _stageManager.player.ballPoints.Clear();
@@ -61,8 +60,9 @@ public class HoleManager : MonoBehaviour
         InitializeStage(++_currentHole);
     }
 
-    public void GameEnd()
+    private IEnumerator GameEndRoutine()
     {
-        Debug.Log("게임 끝");
+        yield return new WaitForSeconds(timeToReady);
+        OnGameEndEvent?.Invoke();
     }
 }
