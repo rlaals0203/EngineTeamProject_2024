@@ -20,10 +20,7 @@ public class CheckOutbounds : MonoBehaviour, IPlayerComponent
         {
             if (_player.CanShot)
             {
-                if (_player.ballPoints.Count <= 1) return;
-
-                _player.ballPoints.Remove(_player.ballPoints[^1]);
-                _player.transform.position = _player.ballPoints[^1];
+                TeleportPrevious(false);
             }
         }
     }
@@ -32,10 +29,21 @@ public class CheckOutbounds : MonoBehaviour, IPlayerComponent
     {
         if (collision.gameObject.CompareTag("Outbounds"))
         {
-            if(_player.ballPoints.Count < 1) return;
-
-            _player.transform.position = _player.ballPoints[^1];
-            _player.RigidCompo.velocity = Vector2.zero;
+            TeleportPrevious(true);
+            Debug.Log("น้");
         }
+    }
+
+    private void TeleportPrevious(bool isOut)
+    {
+        if (_player.ballPoints.Count < 1) return;
+
+        _player.RigidCompo.interpolation = RigidbodyInterpolation.None;
+
+        _player.transform.position = _player.ballPoints[^1];
+
+        if (!isOut) _player.ballPoints.Remove(_player.ballPoints[^1]);
+
+        _player.RigidCompo.velocity = Vector2.zero;
     }
 }
