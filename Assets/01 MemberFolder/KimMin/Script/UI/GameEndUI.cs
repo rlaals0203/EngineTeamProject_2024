@@ -8,10 +8,11 @@ using UnityEngine.SceneManagement;
 
 public class GameEndUI : MonoBehaviour
 {
-    private StageManager _stageManager;
     private GameObject _element;
     private Sequence seq;
     private Sequence seq2;
+
+    public StageDataSO stageDataSO;
 
     [SerializeField] private Image _background;
 
@@ -29,8 +30,6 @@ public class GameEndUI : MonoBehaviour
     private void Awake()
     {
         _element = _background.transform.Find("Elements").gameObject;
-        _stageManager = GameObject.Find("StageManager")
-            .GetComponent<StageManager>();
     }
 
     private void Start()
@@ -42,15 +41,15 @@ public class GameEndUI : MonoBehaviour
     {
         seq = DOTween.Sequence();
 
-        _strokeTxt.text = $"타수\n{_stageManager.totalStroke}";
-        _timeTxt.text = $"플레이 시간\n{Mathf.RoundToInt(_stageManager.totalTime)}";
+        _strokeTxt.text = $"타수\n{stageDataSO.totalStroke}";
+        _timeTxt.text = $"플레이 시간\n{stageDataSO.totalTime}";
 
-        _hioTxt.text = _stageManager.strokeNameDic[GoleEnum.HOLE_IN_ONE].ToString();
-        _condorTxt.text = _stageManager.strokeNameDic[GoleEnum.CONDOR].ToString();
-        _albTxt.text = _stageManager.strokeNameDic[GoleEnum.ALBATROSS].ToString();
-        _eagleTxt.text = _stageManager.strokeNameDic[GoleEnum.EAGLE].ToString();
-        _birdieTxt.text = _stageManager.strokeNameDic[GoleEnum.BIRDIE].ToString();
-        _parTxt.text = _stageManager.strokeNameDic[GoleEnum.PAR].ToString();
+        _hioTxt.text = stageDataSO.stageManager.strokeNameDic[GoleEnum.HOLE_IN_ONE].ToString();
+        _condorTxt.text = stageDataSO.stageManager.strokeNameDic[GoleEnum.CONDOR].ToString();
+        _albTxt.text = stageDataSO.stageManager.strokeNameDic[GoleEnum.ALBATROSS].ToString();
+        _eagleTxt.text = stageDataSO.stageManager.strokeNameDic[GoleEnum.EAGLE].ToString();
+        _birdieTxt.text = stageDataSO.stageManager.strokeNameDic[GoleEnum.BIRDIE].ToString();
+        _parTxt.text = stageDataSO.stageManager.strokeNameDic[GoleEnum.PAR].ToString();
 
 
         seq.Append(_titleTxt.transform.parent.DOMoveY(100, 2f)

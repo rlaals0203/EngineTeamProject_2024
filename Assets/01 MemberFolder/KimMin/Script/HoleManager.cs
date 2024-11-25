@@ -90,6 +90,9 @@ public class HoleManager : MonoBehaviour
         _stageManager.strokes.ToList().ForEach(x => _stageManager.totalStroke += x);
         _stageManager.holeTime.ToList().ForEach(x => _stageManager.totalTime += x);
 
+        _stageManager.stageDataSO.totalStroke = _stageManager.totalStroke;
+        _stageManager.stageDataSO.totalTime = Mathf.RoundToInt(_stageManager.totalTime);
+
         yield return new WaitForSeconds(timeToReady);
         OnGameEndEvent?.Invoke();
     }

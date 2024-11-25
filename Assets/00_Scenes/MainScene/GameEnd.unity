@@ -1205,6 +1205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 231f28c1bbe7c7b4cad9efea4d0635b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stageDataSO: {fileID: 11400000, guid: a7aa108aa108cd345b521d4bcb801e38, type: 2}
   _background: {fileID: 402107008}
   _titleTxt: {fileID: 1776311714}
   _strokeTxt: {fileID: 703327166}

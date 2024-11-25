@@ -9,6 +9,7 @@ public class TitleSceneInit : MonoBehaviour
 
     private void Start()
     {
+        Cursor.lockState = CursorLockMode.None;
         _element.transform.DOLocalMoveY(0, 2f).SetEase(Ease.InOutBack);
     }
 }
