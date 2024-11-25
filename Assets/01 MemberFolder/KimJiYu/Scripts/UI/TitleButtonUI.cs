@@ -14,11 +14,6 @@ public class TitleButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         _btn = GetComponent<Button>();
     }
 
-    private void Start()
-    {
-        
-    }
-
     public void OnPointerEnter(PointerEventData eventData)
     {
         _btn.transform.DOScale(new Vector3(1.1f, 1.1f, 1.1f),0.1f);

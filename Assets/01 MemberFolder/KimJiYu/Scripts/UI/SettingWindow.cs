@@ -1,6 +1,5 @@
+using Cinemachine;
 using DG.Tweening;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,6 +10,10 @@ public class SettingWindow : MonoBehaviour
     [SerializeField] private GameObject _dontClick;
 
     private Image _settingPanel;
+    private GameObject _camera;
+    private GameObject _player;
+    private CinemachineFreeLook _freeLook;
+    private Player _playerSetting;
 
     private bool _isMove = false;
     private float _oldPosition;
@@ -19,6 +22,17 @@ public class SettingWindow : MonoBehaviour
 
     private void Awake()
     {
+        _player = GameObject.Find("Player");
+        if (_player != null)
+            _playerSetting = _player.GetComponent<Player>();
+        else
+            Debug.Log("플레이어 찾지 못함");
+
+        _camera = GameObject.Find("BallCamera");
+        if (_camera != null)
+            _freeLook = _camera.GetComponent<CinemachineFreeLook>();
+        else
+            Debug.Log("시네머신 찾지 못함");
         _settingPanel = _bgPanel.GetComponent<Image>();
     }
 
@@ -42,18 +56,39 @@ public class SettingWindow : MonoBehaviour
                 UpPanel();
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            _playerSetting.CanShot = false;
+        }
     }
 
     private void DownPanel()
     {
+        if (_camera != null)
+            _freeLook.enabled = false;
+        if (_playerSetting != null)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            _playerSetting.CanShot = false;
+        }
         _dontClick.SetActive(true);
         sequence = DOTween.Sequence();
         sequence.Append(_settingPanel.rectTransform.DOLocalMoveY(0, 1));
         sequence.AppendCallback(() => _isMove = true);
+        sequence.AppendCallback(() => Time.timeScale = 0);
     }
 
     private void UpPanel()
     {
+        if (_camera != null)
+            _freeLook.enabled = true;
+        if (_playerSetting != null)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            _playerSetting.CanShot = false;
+        }
+        Time.timeScale = 1;
         _dontClick.SetActive(false);
         sequence = DOTween.Sequence();
         sequence.Append(_settingPanel.rectTransform.DOMoveY(_oldPosition, 1));
