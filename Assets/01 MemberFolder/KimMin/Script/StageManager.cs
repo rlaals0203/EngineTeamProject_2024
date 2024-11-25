@@ -16,6 +16,7 @@ public class StageManager : MonoBehaviour
     public GameObject mapParent;
     public Player player;
     public CinemachineFreeLook freeLook;
+    public StageDataSO stageDataSO;
 
     public Dictionary<StageEnum, GameObject[,]> MapDic = new 
         Dictionary<StageEnum, GameObject[,]>();
@@ -34,10 +35,9 @@ public class StageManager : MonoBehaviour
 
     private void Awake()
     {
+        stageDataSO.stageManager = this;
         SelectStage("Forest");
         mapParent = GameObject.Find("Map");
-        
-        DontDestroyOnLoad(gameObject);
     }
 
     private void SelectStage(string name)

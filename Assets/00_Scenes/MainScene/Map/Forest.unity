@@ -940,6 +940,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bgPanel: {fileID: 231822722}
+  _dontClick: {fileID: 1231594081}
 --- !u!1 &141391678
 GameObject:
   m_ObjectHideFlags: 0
@@ -30243,7 +30244,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5876078306133049309}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.9860954, z: -0.16618013, w: 0}
+  m_LocalRotation: {x: -0, y: 0.9860954, z: -0.16618013, w: -1e-45}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -30944,7 +30945,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5864673073218920002}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0000000032538565, y: 0.9819564, z: -0.18910751, w: -0.000000016895918}
+  m_LocalRotation: {x: -0.0000000032538563, y: 0.9819564, z: -0.18910751, w: -0.000000016895916}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -34648,6 +34649,7 @@ MonoBehaviour:
   mapParent: {fileID: 1477246070}
   player: {fileID: 2527896021485922492}
   freeLook: {fileID: 4142773759972593061}
+  stageDataSO: {fileID: 11400000, guid: a7aa108aa108cd345b521d4bcb801e38, type: 2}
   holeTime:
   - 0
   - 0
