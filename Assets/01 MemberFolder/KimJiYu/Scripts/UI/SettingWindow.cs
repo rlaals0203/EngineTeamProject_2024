@@ -56,11 +56,6 @@ public class SettingWindow : MonoBehaviour
                 UpPanel();
             }
         }
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            _playerSetting.CanShot = false;
-        }
     }
 
     private void DownPanel()
@@ -89,10 +84,10 @@ public class SettingWindow : MonoBehaviour
             _playerSetting.CanShot = false;
         }
         Time.timeScale = 1;
-        _dontClick.SetActive(false);
         sequence = DOTween.Sequence();
         sequence.Append(_settingPanel.rectTransform.DOMoveY(_oldPosition, 1));
         sequence.AppendCallback(() => _isMove = false);
+        sequence.AppendCallback(() => _dontClick.SetActive(false));
     }
 
     public void PanelUpButton()
