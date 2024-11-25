@@ -50,12 +50,10 @@ public class SettingWindow : MonoBehaviour
         sequence = DOTween.Sequence();
         sequence.Append(_settingPanel.rectTransform.DOLocalMoveY(0, 1));
         sequence.AppendCallback(() => _isMove = true);
-        //sequence.AppendCallback(() => Time.timeScale = 0);
     }
 
     private void UpPanel()
     {
-        //Time.timeScale = 1;
         _dontClick.SetActive(false);
         sequence = DOTween.Sequence();
         sequence.Append(_settingPanel.rectTransform.DOMoveY(_oldPosition, 1));
