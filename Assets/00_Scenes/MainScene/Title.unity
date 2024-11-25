@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 77912729}
   - component: {fileID: 77912728}
   - component: {fileID: 77912727}
+  - component: {fileID: 77912730}
   m_Layer: 5
   m_Name: StartBtn
   m_TagString: Untagged
@@ -181,7 +182,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.8773585, g: 0.8773585, b: 0.8773585, a: 1}
@@ -257,6 +258,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 77912725}
   m_CullTransparentMesh: 1
+--- !u!114 &77912730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77912725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4241a9903c2cc743b0d09973e99cf76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &93303635
 GameObject:
   m_ObjectHideFlags: 0
@@ -554,6 +567,7 @@ GameObject:
   - component: {fileID: 248299765}
   - component: {fileID: 248299764}
   - component: {fileID: 248299763}
+  - component: {fileID: 248299766}
   m_Layer: 5
   m_Name: ExitBtn
   m_TagString: Untagged
@@ -600,7 +614,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.8773585, g: 0.8773585, b: 0.8773585, a: 1}
@@ -676,6 +690,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 248299761}
   m_CullTransparentMesh: 1
+--- !u!114 &248299766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 248299761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4241a9903c2cc743b0d09973e99cf76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &397066928
 GameObject:
   m_ObjectHideFlags: 0
@@ -1688,6 +1714,7 @@ GameObject:
   - component: {fileID: 1774867832}
   - component: {fileID: 1774867831}
   - component: {fileID: 1774867830}
+  - component: {fileID: 1774867833}
   m_Layer: 5
   m_Name: TutorialBtn
   m_TagString: Untagged
@@ -1734,7 +1761,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.8773585, g: 0.8773585, b: 0.8773585, a: 1}
@@ -1810,6 +1837,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1774867828}
   m_CullTransparentMesh: 1
+--- !u!114 &1774867833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774867828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4241a9903c2cc743b0d09973e99cf76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1781358443
 GameObject:
   m_ObjectHideFlags: 0
