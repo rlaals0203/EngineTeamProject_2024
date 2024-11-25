@@ -41,7 +41,6 @@ public class GameEndUI : MonoBehaviour
     private void TextTween()
     {
         seq = DOTween.Sequence();
-        seq2 = DOTween.Sequence();
 
         _strokeTxt.text = $"타수\n{_stageManager.totalStroke}";
         _timeTxt.text = $"플레이 시간\n{Mathf.RoundToInt(_stageManager.totalTime)}";
@@ -82,6 +81,9 @@ public class GameEndUI : MonoBehaviour
 
     private void TransitionTween()
     {
+        seq2 = DOTween.Sequence();
+        seq.Kill();
+
         seq2.Append(_element.transform.DOMoveY(3000, 1.5f))
             .SetEase(Ease.InOutBack)
             .Append(_background.DOColor(Color.white, 1f))

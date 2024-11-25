@@ -97,8 +97,6 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
         if (_player.RigidCompo.interpolation != RigidbodyInterpolation.Interpolate)
             _player.RigidCompo.interpolation = RigidbodyInterpolation.Interpolate;
 
-
-
         if (shootPower < 25)
             shootPower /= 2;
 
