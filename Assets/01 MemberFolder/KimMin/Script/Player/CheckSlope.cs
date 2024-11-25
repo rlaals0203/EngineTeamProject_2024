@@ -16,6 +16,14 @@ public class CheckSlope : MonoBehaviour, IPlayerComponent
     private void Update()
     {
         RaySlope();
+
+        if (!_player.IsSlope)
+        {
+            Vector3 veloctiy = _player.RigidCompo.velocity; veloctiy.y *= 0.5f;
+            _player.RigidCompo.velocity = veloctiy;
+            Mathf.Clamp(_player.RigidCompo.velocity.y, int.MinValue, 0);
+        }
+        else Debug.Log("경사");
     }
 
     private void RaySlope()
@@ -26,20 +34,15 @@ public class CheckSlope : MonoBehaviour, IPlayerComponent
         {
             float angle = Vector3.Angle(hit.normal, Vector3.up);
 
-            if (angle > slopeThreshold)
-            {
-                _player.IsSlope = true;
-                Debug.Log("경사");
-            }
-            else
-            {
-                _player.IsSlope = false;
+            _player.IsSlope = angle > slopeThreshold;
+        }
+    }
 
-                _player.RigidCompo.velocity = new Vector3(
-                    _player.RigidCompo.velocity.x,
-                    _player.RigidCompo.velocity.y / 1.5f,
-                    _player.RigidCompo.velocity.z);
-            }
+    private void OnTriggerStay(Collider collide)
+    {
+        if (collide.CompareTag("NearHole"))
+        {
+            _player.IsSlope = true;
         }
     }
 }

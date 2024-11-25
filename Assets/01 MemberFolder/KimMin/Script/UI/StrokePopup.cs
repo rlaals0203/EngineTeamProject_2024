@@ -19,10 +19,12 @@ public class StrokePopup : MonoBehaviour
     private void HandleOnGole(int stroke, GoleEnum gole)
     {
         Color col = _checkGole.strokeDic[gole];
-
         _sequence = DOTween.Sequence();
+
         _popUpText.color = col;
+        _popUpText.faceColor = col;
         _popUpText.text = gole.ToString();
+        _popUpText.ForceMeshUpdate();
 
         _sequence
             .Append(_popUpText.transform.DOScale(1.5f, 0.5f))

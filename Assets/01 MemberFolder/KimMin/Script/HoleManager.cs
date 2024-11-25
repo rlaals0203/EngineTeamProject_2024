@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class HoleManager : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class HoleManager : MonoBehaviour
     public int _currentHole;
     public CheckGole _checkGole;
     public StageManager _stageManager;
+    private Rigidbody _rigid;
 
     private Vector3 nextPos;
 
@@ -22,6 +24,7 @@ public class HoleManager : MonoBehaviour
     {
         _stageManager = GetComponent<StageManager>();
         _checkGole = _stageManager.player.GetComponent<CheckGole>();
+        _rigid = _stageManager.player.GetComponent<Rigidbody>();
 
         _checkGole.OnGoleEvent += HandleGole;
 
@@ -64,6 +67,9 @@ public class HoleManager : MonoBehaviour
 
     public void InitializeStage(int hole)
     {
+        if (hole != 1)
+            _stageManager.player.RigidCompo.interpolation = RigidbodyInterpolation.None;
+
         _stageManager.player.transform.position = nextPos;
         _stageManager.player.IsGole = false;
         _stageManager.player.ballPoints.Clear();
