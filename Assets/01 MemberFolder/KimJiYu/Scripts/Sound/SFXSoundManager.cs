@@ -23,7 +23,6 @@ public class SFXSoundManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
         _audioSource = GetComponent<AudioSource>();
     }
 
