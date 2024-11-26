@@ -36,6 +36,5 @@ public class PlayerSetting : MonoBehaviour
             RigidCompo.angularVelocity = Vector3.zero;
             IsLoaded = true;
         }
-
     }
 }

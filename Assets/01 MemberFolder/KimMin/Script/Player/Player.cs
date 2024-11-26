@@ -32,24 +32,9 @@ public class Player : PlayerSetting
         _components.Values.ToList().ForEach(compo => compo.Initialize(this));
     }
 
-    private void Start()
-    {
-        RigidCompo.position = new Vector3(0, 1, 0);
-    }
-
     private void Update()
     {
         stateMachine.CurrentState.UpdateState();
-
-        if (float.IsInfinity(RigidCompo.velocity.magnitude) || float.IsNaN(RigidCompo.velocity.magnitude))
-        {
-            RigidCompo.velocity = Vector3.zero;
-        }
-
-        if (RigidCompo.velocity.magnitude > MAX_SPEED)
-        {
-            RigidCompo.velocity = RigidCompo.velocity.normalized * MAX_SPEED;
-        }
     }
 
     public T GetCompo<T>() where T : class

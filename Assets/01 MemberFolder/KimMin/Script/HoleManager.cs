@@ -14,9 +14,6 @@ public class HoleManager : MonoBehaviour
     public CheckGole _checkGole;
     public StageManager _stageManager;
     private Rigidbody _rigid;
-
-    private readonly string _path = Path.Combine(Application.persistentDataPath, "gameData.txt");
-
     private Vector3 nextPos;
 
     private void Awake()
@@ -69,19 +66,18 @@ public class HoleManager : MonoBehaviour
 
     public void InitializeStage(int hole)
     {
-        if (hole > 1)
-        {
-            _stageManager.player.RigidCompo.interpolation = RigidbodyInterpolation.None;
-        }
-
         _stageManager.player.ResetPhysics();
         _stageManager.player.IsGole = false;
         _stageManager.player.ballPoints.Clear();
         OnStageInitEvent?.Invoke();
 
-        _stageManager.player.transform.position = _stageManager.map[_currentHole - 1]
-                            .transform.Find("End")
-                            .transform.Find("StartPos").position; ;
+        if (hole > 1)
+        {
+            _stageManager.player.RigidCompo.interpolation = RigidbodyInterpolation.None;
+            _stageManager.player.transform.position = nextPos;
+        }
+        else
+            _stageManager.player.RigidCompo.position = new Vector3(236.7f, 2.4f, 546);
     }
 
     private IEnumerator HoleInitRoutine()
@@ -112,5 +108,4 @@ public class HoleManager : MonoBehaviour
         yield return new WaitForSeconds(timeToReady);
         OnGameEndEvent?.Invoke();
     }
-
 }
