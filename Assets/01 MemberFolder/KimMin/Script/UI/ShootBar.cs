@@ -1,4 +1,5 @@
 using Cinemachine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,7 +20,15 @@ public class ShootBar : MonoBehaviour
     public void Awake()
     {
         _ballShooting = _player.GetComponent<BallShooting>();
-        _freeLookCam = GameObject.Find("BallCamera").GetComponent<CinemachineFreeLook>();
+
+        try
+        {
+            _freeLookCam = GameObject.Find("BallCamera").GetComponent<CinemachineFreeLook>();
+        }
+        catch(NullReferenceException ex)
+        {
+            Debug.Log(ex.Message);
+        }
 
         _background = transform.Find("Background").gameObject;
         _fill = _background.transform.Find("Fill").GetComponent<Image>();
