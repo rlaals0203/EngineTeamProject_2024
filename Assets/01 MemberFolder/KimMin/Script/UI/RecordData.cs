@@ -20,7 +20,7 @@ public class RecordData : MonoBehaviour
 
     private void Awake()
     {
-        recordData = File.ReadAllLines(@"aaa.txt").ToList();
+        recordData = File.ReadAllLines(@"gameData.txt").ToList();
 
         if (recordData.Count < 3) return;
 

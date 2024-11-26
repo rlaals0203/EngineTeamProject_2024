@@ -74,8 +74,6 @@ public class GameEndUI : MonoBehaviour
             {
                 TransitionTween();
             });
-
-
     }
 
     private void TransitionTween()
@@ -88,7 +86,6 @@ public class GameEndUI : MonoBehaviour
             .Append(_background.DOColor(Color.white, 1f))
             .OnComplete(() =>
             {
-                Debug.Log("¾Æ¾Æ");
                 SceneManager.LoadScene("Title");
             });
     }

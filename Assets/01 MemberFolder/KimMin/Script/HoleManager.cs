@@ -100,7 +100,7 @@ public class HoleManager : MonoBehaviour
         _stageManager.strokes.ToList().ForEach(x => _stageManager.totalStroke += x);
         _stageManager.holeTime.ToList().ForEach(x => _stageManager.totalTime += x);
 
-        using (StreamWriter sw = new StreamWriter(File.Open(@"aaa.txt",FileMode.OpenOrCreate)))
+        using (StreamWriter sw = new StreamWriter(File.Open(@"gameData.txt",FileMode.OpenOrCreate)))
         {
             sw.WriteLine(_stageManager.totalStroke);
             sw.WriteLine(_stageManager.totalTime);
