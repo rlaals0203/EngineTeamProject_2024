@@ -38,13 +38,18 @@ public class ShootBar : MonoBehaviour
     {
         if (_player.IsRelease && _ballShooting.shootPower > 0.1f)
         {
-            _ballShooting.isCancel = true;
-            _player.IsRelease = false;
-
             ChangeSlider();
             ActiveObjects(true);
         }
-        else ActiveObjects(false);
+        else if (_player.IsRelease && _ballShooting.shootPower <= 0f)
+        {
+            _ballShooting.CancelShooting();
+            ActiveObjects(false);
+        }
+        else
+        {
+            ActiveObjects(false);
+        }
     }
 
     private void ChangeSlider()
