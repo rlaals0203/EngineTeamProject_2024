@@ -22,12 +22,6 @@ public class SettingWindow : MonoBehaviour
 
     private void Awake()
     {
-        _player = GameObject.Find("Player");
-        if (_player != null)
-            _playerSetting = _player.GetComponent<Player>();
-        else
-            Debug.Log("플레이어 찾지 못함");
-
         _camera = GameObject.Find("BallCamera");
         if (_camera != null)
             _freeLook = _camera.GetComponent<CinemachineFreeLook>();
@@ -61,10 +55,13 @@ public class SettingWindow : MonoBehaviour
     private void DownPanel()
     {
         if (_camera != null)
+        {
             _freeLook.enabled = false;
+            Cursor.lockState = CursorLockMode.None;
+        }
+
         if (_playerSetting != null)
         {
-            Cursor.lockState = CursorLockMode.None;
             _playerSetting.CanShot = false;
         }
         _dontClick.SetActive(true);
@@ -77,10 +74,13 @@ public class SettingWindow : MonoBehaviour
     private void UpPanel()
     {
         if (_camera != null)
+        {
             _freeLook.enabled = true;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+
         if (_playerSetting != null)
         {
-            Cursor.lockState = CursorLockMode.Locked;
             _playerSetting.CanShot = false;
         }
         Time.timeScale = 1;
