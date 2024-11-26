@@ -16,6 +16,7 @@ public class SettingWindow : MonoBehaviour
     private Player _playerSetting;
 
     private bool _isMove = false;
+    private bool _isMoving = false;
     private float _oldPosition;
 
     private Sequence sequence;
@@ -29,8 +30,11 @@ public class SettingWindow : MonoBehaviour
         _camera = GameObject.Find("BallCamera");
         if (_camera != null)
             _freeLook = _camera.GetComponent<CinemachineFreeLook>();
-        else
-            Debug.Log("시네머신 찾지 못함");
+        //else
+        //{
+        //    Cursor.lockState = CursorLockMode.None;
+        //    Cursor.visible = true;
+        //}
         _settingPanel = _bgPanel.GetComponent<Image>();
     }
 
@@ -43,21 +47,26 @@ public class SettingWindow : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (!_isMoving)
         {
-            if (!_isMove)
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                DownPanel();
-            }
-            else if (_isMove)
-            {
-                UpPanel();
+                if (!_isMove)
+                {
+                    PanelDownButton();
+                }
+                else if (_isMove)
+                {
+                    PanelUpButton();
+                }
             }
         }
+        
     }
 
     private void DownPanel()
     {
+        _isMoving = true;
         if (_camera != null)
         {
             _freeLook.enabled = false;
@@ -73,12 +82,14 @@ public class SettingWindow : MonoBehaviour
         _dontClick.SetActive(true);
         sequence = DOTween.Sequence();
         sequence.Append(_settingPanel.rectTransform.DOLocalMoveY(0, 1));
-        sequence.AppendCallback(() => _isMove = true);
         sequence.AppendCallback(() => Time.timeScale = 0);
+        sequence.AppendCallback(() => _isMove = true);
+        sequence.OnComplete(() => _isMoving = false);
     }
 
     private void UpPanel()
     {
+        _isMoving = true;
         if (_playerSetting != null)
         {
             _playerSetting.CanShot = false;
@@ -86,7 +97,6 @@ public class SettingWindow : MonoBehaviour
         Time.timeScale = 1;
         sequence = DOTween.Sequence();
         sequence.Append(_settingPanel.rectTransform.DOMoveY(_oldPosition, 1));
-        sequence.AppendCallback(() => _isMove = false);
         sequence.AppendCallback(() => _dontClick.SetActive(false));
         sequence.AppendCallback(() => 
         { 
@@ -97,6 +107,8 @@ public class SettingWindow : MonoBehaviour
                 _freeLook.enabled = true;
             }
         });
+        sequence.AppendCallback(()=> _isMove = false);;
+        sequence.OnComplete(()=> _isMoving = false);;
     }
 
     public void PanelUpButton()
@@ -113,6 +125,6 @@ public class SettingWindow : MonoBehaviour
 
     public void returnTitle()
     {
-        SceneManager.LoadScene("Title");
+        SceneManager.LoadSceneAsync(0);
     }
 }

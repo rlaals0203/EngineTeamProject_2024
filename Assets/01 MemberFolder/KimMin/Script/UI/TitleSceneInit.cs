@@ -6,10 +6,17 @@ using DG.Tweening;
 public class TitleSceneInit : MonoBehaviour
 {
     [SerializeField] private GameObject _element;
+    private Sequence _seq;
+
+    private void Awake()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
 
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.None;
-        _element.transform.DOLocalMoveY(0, 2f).SetEase(Ease.InOutBack);
+        _seq = DOTween.Sequence();
+        _seq.Append(_element.transform.DOLocalMoveY(0, 2f).SetEase(Ease.InOutBack));
     }
 }
