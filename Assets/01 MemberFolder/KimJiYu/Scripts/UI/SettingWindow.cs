@@ -81,7 +81,7 @@ public class SettingWindow : MonoBehaviour
         }
         _dontClick.SetActive(true);
         sequence = DOTween.Sequence();
-        sequence.Append(_settingPanel.rectTransform.DOLocalMoveY(0, 1));
+        sequence.Append(_settingPanel.rectTransform.DOLocalMoveY(0, 1.2f).SetEase(Ease.OutBack));
         sequence.AppendCallback(() => Time.timeScale = 0);
         sequence.AppendCallback(() => _isMove = true);
         sequence.OnComplete(() => _isMoving = false);
@@ -125,6 +125,7 @@ public class SettingWindow : MonoBehaviour
 
     public void returnTitle()
     {
+        Time.timeScale = 1;
         SceneManager.LoadSceneAsync(0);
     }
 }

@@ -1,14 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class SFXSoundManager : MonoBehaviour
 {
     public static SFXSoundManager instance;
+    public event Action OnHoleInOneClip;
+    public event Action OnAlbatrosClip;
+    public event Action OnGoleClip;
+    public event Action OnShotClip;
+
     [SerializeField] private Slider _sfxVolumeSlider;
-    [SerializeField] private AudioClip _audioClip;
+    [SerializeField] private AudioClip _holeInOneClip;
+    [SerializeField] private AudioClip _albatrosClip;
+    [SerializeField] private AudioClip _goleClip;
+    [SerializeField] private AudioClip _shotClip;
 
     private AudioSource _audioSource;
 
@@ -24,6 +30,11 @@ public class SFXSoundManager : MonoBehaviour
             Destroy(gameObject);
         }
         _audioSource = GetComponent<AudioSource>();
+
+        OnHoleInOneClip += HoleInOneSound;
+        OnAlbatrosClip += AlbatrosSound;
+        OnGoleClip += GoleSound;
+        OnShotClip += ShotSound;
     }
 
     private void Start()
@@ -40,9 +51,24 @@ public class SFXSoundManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-            PlaySfxClip();
+            OnHoleInOneClip.Invoke();
+        }
+
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            OnAlbatrosClip.Invoke();
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            OnGoleClip.Invoke();
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            OnShotClip.Invoke();
         }
     }
 
@@ -62,13 +88,29 @@ public class SFXSoundManager : MonoBehaviour
         PlayerPrefs.SetFloat("sfxVolume",_sfxVolumeSlider.value);
     }
 
-    public void PlaySfxClip()
+    public void ChangeSfxClip()
     {
-        if (_audioClip == null)
-            return;
-
         _audioSource.volume = _sfxVolumeSlider.value;
-        _audioSource.PlayOneShot(_audioClip);
+    }
+
+    public void HoleInOneSound()
+    {
+        _audioSource.PlayOneShot(_holeInOneClip);
+    }
+
+    public void AlbatrosSound()
+    {
+        _audioSource.PlayOneShot(_albatrosClip);
+    }
+
+    public void GoleSound()
+    {
+        _audioSource.PlayOneShot(_goleClip);
+    }
+
+    public void ShotSound()
+    {
+        _audioSource.PlayOneShot(_shotClip);
     }
 }
  

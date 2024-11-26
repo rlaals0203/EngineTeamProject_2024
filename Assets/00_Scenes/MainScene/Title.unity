@@ -412,7 +412,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sfxVolumeSlider: {fileID: 1403989083}
-  _audioClip: {fileID: 8300000, guid: 0c1854ef97b659a4aaa47296439fe951, type: 3}
+  _holeInOneClip: {fileID: 8300000, guid: 5b0fca7e9d1f7d940ae7c88d0013bd3a, type: 3}
+  _albatrosClip: {fileID: 8300000, guid: 956eba8c26676d043b35c58372333810, type: 3}
+  _goleClip: {fileID: 8300000, guid: e1006a5cdd4d10144bf8c750c3e9234a, type: 3}
+  _shotClip: {fileID: 8300000, guid: 80790428217780141982cf7d0fd6b41c, type: 3}
 --- !u!1 &121360669
 GameObject:
   m_ObjectHideFlags: 0

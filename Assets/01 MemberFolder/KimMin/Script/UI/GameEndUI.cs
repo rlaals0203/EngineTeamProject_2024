@@ -53,23 +53,23 @@ public class GameEndUI : MonoBehaviour
 
 
         seq.Append(_titleTxt.transform.parent.DOMoveY(100, 2f)
-            .SetEase(Ease.InOutBack))
+            .SetEase(Ease.OutBack))
             .Append(_strokeTxt.transform.parent.DOMoveY(500, 2f)
-            .SetEase(Ease.InOutBack))
+            .SetEase(Ease.OutBack))
             .Append(_timeTxt.transform.parent.DOMoveY(500, 2f)
-            .SetEase(Ease.InOutBack))
+            .SetEase(Ease.OutBack))
             .Append(_hioTxt.transform.parent.DOMoveY(200, 1.5f)
-            .SetEase(Ease.InOutBack))
+            .SetEase(Ease.OutBack))
             .Append(_condorTxt.transform.parent.DOMoveY(200, 1.5f)
-            .SetEase(Ease.InOutBack))
+            .SetEase(Ease.OutBack))
             .Append(_albTxt.transform.parent.DOMoveY(200, 1.5f)
-            .SetEase(Ease.InOutBack))
+            .SetEase(Ease.OutBack))
             .Append(_eagleTxt.transform.parent.DOMoveY(200, 1.5f)
-            .SetEase(Ease.InOutBack))
+            .SetEase(Ease.OutBack))
             .Append(_birdieTxt.transform.parent.DOMoveY(200, 1.5f)
-            .SetEase(Ease.InOutBack))
+            .SetEase(Ease.OutBack))
             .Append(_parTxt.transform.parent.DOMoveY(200, 1.5f)
-            .SetEase(Ease.InOutBack))
+            .SetEase(Ease.OutBack))
             .OnComplete(() =>
             {
                 TransitionTween();
@@ -84,7 +84,7 @@ public class GameEndUI : MonoBehaviour
         seq.Kill();
 
         seq2.Append(_element.transform.DOMoveY(3000, 1.5f))
-            .SetEase(Ease.InOutBack)
+            .SetEase(Ease.OutBack)
             .Append(_background.DOColor(Color.white, 1f))
             .OnComplete(() =>
             {
