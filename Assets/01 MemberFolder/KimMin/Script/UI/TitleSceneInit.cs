@@ -43,7 +43,6 @@ public class TitleSceneInit : MonoBehaviour
         _seq?.Kill();
 
         _seq = DOTween.Sequence();
-        _seq.Append(_element.transform.DOLocalMoveY(0, 2f).SetEase(Ease.OutBack))
-            .AppendCallback(() => Debug.Log("dododo"));
+        _seq.Append(_element.transform.DOLocalMoveY(0, 2f).SetEase(Ease.OutBack));
     }
 }
