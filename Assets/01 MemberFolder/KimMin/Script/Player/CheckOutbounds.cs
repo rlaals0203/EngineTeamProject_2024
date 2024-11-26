@@ -43,6 +43,6 @@ public class CheckOutbounds : MonoBehaviour, IPlayerComponent
 
         if (!isOut) _player.ballPoints.Remove(_player.ballPoints[^1]);
 
-        _player.RigidCompo.velocity = Vector2.zero;
+        //_player.RigidCompo.velocity = Vector2.zero;
     }
 }

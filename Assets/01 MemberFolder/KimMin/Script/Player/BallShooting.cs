@@ -14,10 +14,11 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
     [SerializeField] private float _powerSensivity = 20f;
     [Range(0, 100f)] public float shootPower;
 
-    public int stroke = 0;
-
     private Player _player;
     private Transform _cam;
+
+    public int stroke = 0;
+    public int ballPointCnt = 0;
 
     private bool _isHold;
     private bool _isCancel;
@@ -102,6 +103,7 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
 
         _player.RigidCompo.velocity = shootDir * shootPower / 4;
 
+        ballPointCnt++;
         stroke++;
         shootPower = 0;
         OnShootEvent?.Invoke();

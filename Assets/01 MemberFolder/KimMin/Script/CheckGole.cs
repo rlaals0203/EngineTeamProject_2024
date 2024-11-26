@@ -69,7 +69,8 @@ public class CheckGole : MonoBehaviour, IPlayerComponent
 
     private void HandleOnShotEnd()
     {
-        _player.ballPoints.Add(_player.transform.position);
+        if (_player.ballPoints.Count < _ballShoot.ballPointCnt)
+            _player.ballPoints.Add(_player.transform.position);
     }
 
     public void OnGole(bool isGutter)
@@ -78,7 +79,6 @@ public class CheckGole : MonoBehaviour, IPlayerComponent
 
         int par = _ballShoot.stroke > 1 ? _ballShoot.stroke - _par : -100;
         GoleEnum gole = (GoleEnum)par;
-
 
         if (isGutter)
             OnGoleEvent?.Invoke(13, GoleEnum.GUTTER);
@@ -94,6 +94,7 @@ public class CheckGole : MonoBehaviour, IPlayerComponent
         _player.ResetPhysics();
         _player.IsGole = true;
 
+        _ballShoot.ballPointCnt = 0;
         _ballShoot.stroke = 0;
     }
 

@@ -17,13 +17,18 @@ public class CheckSlope : MonoBehaviour, IPlayerComponent
     {
         RaySlope();
 
-        if (!_player.IsSlope)
+        if (_player.IsSlope)
+        {
+            _player.PhysicsMatCompo.bounciness = 0;
+        }
+        else
         {
             if (_player.RigidCompo == null || !_player.IsLoaded) return;
 
             Vector3 veloctiy = _player.RigidCompo.velocity;
             veloctiy.y = Mathf.Clamp(_player.RigidCompo.velocity.y, int.MinValue, 0); ;
             _player.RigidCompo.velocity = veloctiy;
+            _player.PhysicsMatCompo.bounciness = 0.7f;
         }
     }
 
