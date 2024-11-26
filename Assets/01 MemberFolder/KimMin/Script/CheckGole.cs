@@ -96,6 +96,27 @@ public class CheckGole : MonoBehaviour, IPlayerComponent
 
         _ballShoot.ballPointCnt = 0;
         _ballShoot.stroke = 0;
+
+        PlayGoleSound(gole);
+    }
+
+    private void PlayGoleSound(GoleEnum gole)
+    {
+        switch (gole)
+        {
+            case GoleEnum.HOLE_IN_ONE:
+                SFXSoundManager.instance.OnHoleInOneClip?.Invoke();
+                break;
+            case GoleEnum.CONDOR:
+                SFXSoundManager.instance.OnAlbatrosClip?.Invoke();
+                break;
+            case GoleEnum.ALBATROSS:
+                SFXSoundManager.instance.OnAlbatrosClip?.Invoke();
+                break;
+            default:
+                SFXSoundManager.instance.OnGoleClip?.Invoke();
+                break;
+        }
     }
 
     private void OnTriggerEnter(Collider other)

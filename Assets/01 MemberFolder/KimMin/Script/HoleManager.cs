@@ -75,9 +75,14 @@ public class HoleManager : MonoBehaviour
         {
             _stageManager.player.RigidCompo.interpolation = RigidbodyInterpolation.None;
             _stageManager.player.transform.position = nextPos;
+            _stageManager.player.ballPoints.Add(nextPos);
         }
         else
-            _stageManager.player.RigidCompo.position = new Vector3(236.7f, 2.4f, 546);
+        {
+            Vector3 startPos = new Vector3(236.7f, 2.4f, 546);
+            _stageManager.player.RigidCompo.position = startPos;
+            _stageManager.player.ballPoints.Add(startPos);
+        }
     }
 
     private IEnumerator HoleInitRoutine()
@@ -99,6 +104,7 @@ public class HoleManager : MonoBehaviour
         {
             sw.WriteLine(_stageManager.totalStroke);
             sw.WriteLine(_stageManager.totalTime);
+            sw.WriteLine(DateTime.Now);
             sw.Close();
         }
 

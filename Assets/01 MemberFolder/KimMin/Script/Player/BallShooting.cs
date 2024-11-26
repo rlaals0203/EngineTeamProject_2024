@@ -107,5 +107,6 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
         stroke++;
         shootPower = 0;
         OnShootEvent?.Invoke();
+        SFXSoundManager.instance.OnShotClip?.Invoke();
     }
 }

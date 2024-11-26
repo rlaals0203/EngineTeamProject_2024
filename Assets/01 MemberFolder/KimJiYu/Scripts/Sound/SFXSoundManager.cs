@@ -5,10 +5,10 @@ using UnityEngine.UI;
 public class SFXSoundManager : MonoBehaviour
 {
     public static SFXSoundManager instance;
-    public event Action OnHoleInOneClip;
-    public event Action OnAlbatrosClip;
-    public event Action OnGoleClip;
-    public event Action OnShotClip;
+    public Action OnHoleInOneClip;
+    public Action OnAlbatrosClip;
+    public Action OnGoleClip;
+    public Action OnShotClip;
 
     [SerializeField] private Slider _sfxVolumeSlider;
     [SerializeField] private AudioClip _holeInOneClip;

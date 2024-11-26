@@ -7,11 +7,13 @@ using UnityEngine.InputSystem;
 public class CheckOutbounds : MonoBehaviour, IPlayerComponent
 {
     private Player _player;
+    private BallShooting _ballShooting;
     public LayerMask whatIsOutbounds;
 
     public void Initialize(Player player)
     {
         _player = player;
+        _ballShooting = _player.GetCompo<BallShooting>();
     }
 
     private void Update()
@@ -35,14 +37,22 @@ public class CheckOutbounds : MonoBehaviour, IPlayerComponent
 
     private void TeleportPrevious(bool isOut)
     {
-        if (_player.ballPoints.Count < 1) return;
+        Debug.Log("µ¹¾Æ°¡");
+        if (_player.ballPoints.Count <= 1) return;
 
-        _player.RigidCompo.interpolation = RigidbodyInterpolation.None;
+        //_player.RigidCompo.interpolation = RigidbodyInterpolation.None;
 
         _player.transform.position = _player.ballPoints[^1];
 
-        if (!isOut) _player.ballPoints.Remove(_player.ballPoints[^1]);
+        //_player.RigidCompo.interpolation = RigidbodyInterpolation.Interpolate;
 
-        //_player.RigidCompo.velocity = Vector2.zero;
+        if (!isOut)
+        {
+            _player.ballPoints.Remove(_player.ballPoints[^1]);
+            _ballShooting.ballPointCnt -= 1;
+        }
+
+
+        _player.RigidCompo.velocity = Vector2.zero;
     }
 }
