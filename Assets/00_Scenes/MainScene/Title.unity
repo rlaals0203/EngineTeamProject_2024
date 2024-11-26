@@ -412,7 +412,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sfxVolumeSlider: {fileID: 1403989083}
-  _audioClip: {fileID: 8300000, guid: 0c1854ef97b659a4aaa47296439fe951, type: 3}
+  _holeInOneClip: {fileID: 8300000, guid: 5b0fca7e9d1f7d940ae7c88d0013bd3a, type: 3}
+  _albatrosClip: {fileID: 8300000, guid: 956eba8c26676d043b35c58372333810, type: 3}
+  _goleClip: {fileID: 8300000, guid: e1006a5cdd4d10144bf8c750c3e9234a, type: 3}
+  _shotClip: {fileID: 8300000, guid: 80790428217780141982cf7d0fd6b41c, type: 3}
 --- !u!1 &121360669
 GameObject:
   m_ObjectHideFlags: 0
@@ -897,24 +900,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &595437759 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5765620898537944550, guid: 05e1f72dd331b1e4e8a7a9e7eea60872,
-    type: 3}
-  m_PrefabInstance: {fileID: 1931071038453970473}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &595437764
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 595437759}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4241a9903c2cc743b0d09973e99cf76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &665119344
 GameObject:
   m_ObjectHideFlags: 0
@@ -2169,11 +2154,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5765620898537944550, guid: 05e1f72dd331b1e4e8a7a9e7eea60872,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 595437764}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05e1f72dd331b1e4e8a7a9e7eea60872, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
