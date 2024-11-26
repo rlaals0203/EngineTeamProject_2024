@@ -76,7 +76,7 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
         }
     }
 
-    private void CancelShooting() //Ω∏ √Îº“
+    public void CancelShooting() //Ω∏ √Îº“
     {
         shootPower = 0;
         _player.IsRelease = false;

@@ -14,6 +14,7 @@ public class SettingWindow : MonoBehaviour
     private GameObject _player;
     private CinemachineFreeLook _freeLook;
     private Player _playerSetting;
+    private BallShooting _ballShooting;
 
     private bool _isMove = false;
     private bool _isMoving = false;
@@ -51,7 +52,7 @@ public class SettingWindow : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                if (!_isMove)
+                if (!_isMove && !_playerSetting.IsRelease)
                 {
                     PanelDownButton();
                 }
@@ -67,6 +68,7 @@ public class SettingWindow : MonoBehaviour
     private void DownPanel()
     {
         _isMoving = true;
+
         if (_camera != null)
         {
             _freeLook.enabled = false;
@@ -76,8 +78,11 @@ public class SettingWindow : MonoBehaviour
 
         if (_playerSetting != null)
         {
+            if (_ballShooting == null)
+                _ballShooting = _playerSetting.GetComponent<BallShooting>();
+
             _playerSetting.CanShot = false;
-            _playerSetting.IsRelease = false;
+            _ballShooting.CancelShooting();
         }
         _dontClick.SetActive(true);
         sequence = DOTween.Sequence();
