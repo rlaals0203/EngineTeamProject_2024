@@ -51,25 +51,6 @@ public class SFXSoundManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            OnHoleInOneClip.Invoke();
-        }
-
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            OnAlbatrosClip.Invoke();
-        }
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            OnGoleClip.Invoke();
-        }
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            OnShotClip.Invoke();
-        }
     }
 
     public void SfxChangeVolume()
