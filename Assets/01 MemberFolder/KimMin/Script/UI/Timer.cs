@@ -35,7 +35,6 @@ public class Timer : MonoBehaviour
         _holeManager._stageManager.holeTime[_holeManager._currentHole - 1] = _startTime - _time;
         _time = _startTime;
         _timerTxt.text = $"{_startTime}√ ";
-        _timerTxt.transform.DOLocalMoveY(10f, 0.5f).SetEase(Ease.OutExpo);
     }
 
     private void HandleOnShoot()
@@ -44,7 +43,6 @@ public class Timer : MonoBehaviour
         {
             _isRunning = true;
             _timerTxt.text = $"{_time}√ ";
-            _timerTxt.transform.DOLocalMoveY(- 10f, 0.5f).SetEase(Ease.OutExpo);
         }
     }
 
