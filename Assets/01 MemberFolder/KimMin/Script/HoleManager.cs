@@ -25,6 +25,7 @@ public class HoleManager : MonoBehaviour
         _checkGole = _stageManager.player.GetComponent<CheckGole>();
         _rigid = _stageManager.player.GetComponent<Rigidbody>();
 
+        _rigid.isKinematic = false;
         _checkGole.OnGoleEvent += HandleGole;
 
         Initialize();

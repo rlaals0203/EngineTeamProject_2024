@@ -26,7 +26,5 @@ public class PlayerSetting : MonoBehaviour
         RigidCompo = GetComponent<Rigidbody>();
         PhysicsMatCompo = GetComponent<SphereCollider>().material;
         RigidCompo.mass = mass;
-
-        RigidCompo.isKinematic = false;
     }
 }
