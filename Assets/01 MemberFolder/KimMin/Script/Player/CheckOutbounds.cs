@@ -30,7 +30,6 @@ public class CheckOutbounds : MonoBehaviour, IPlayerComponent
         if (collision.gameObject.CompareTag("Outbounds"))
         {
             TeleportPrevious(true);
-            Debug.Log("น้");
         }
     }
 

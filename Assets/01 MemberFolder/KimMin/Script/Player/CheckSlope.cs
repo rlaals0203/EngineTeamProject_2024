@@ -13,19 +13,18 @@ public class CheckSlope : MonoBehaviour, IPlayerComponent
         _player = player;
     }
 
-    private void LateUpdate()
+    private void Update()
     {
         RaySlope();
 
         if (!_player.IsSlope)
         {
-            if (_player.RigidCompo == null) return;
+            if (_player.RigidCompo == null || !_player.IsLoaded) return;
 
-            Vector3 veloctiy = _player.RigidCompo.velocity; veloctiy.y *= 0.5f;
+            Vector3 veloctiy = _player.RigidCompo.velocity;
+            veloctiy.y = Mathf.Clamp(_player.RigidCompo.velocity.y, int.MinValue, 0); ;
             _player.RigidCompo.velocity = veloctiy;
-            Mathf.Clamp(_player.RigidCompo.velocity.y, int.MinValue, 0);
         }
-        else Debug.Log("°æ»ç");
     }
 
     private void RaySlope()
