@@ -91,7 +91,7 @@ public class CheckGole : MonoBehaviour, IPlayerComponent
         if (_ballShoot.stroke <= 5)
             _stageManager.strokeNameDic[gole]++;
 
-        _player.StopImmediatly();
+        _player.ResetPhysics();
         _player.IsGole = true;
 
         _ballShoot.stroke = 0;

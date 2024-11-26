@@ -47,10 +47,14 @@ public class BallPhysics : MonoBehaviour, IPlayerComponent
 
     private void TryStopBall()
     {
-        _player.RigidCompo.velocity = Vector3.zero;
+        _player.RigidCompo.velocity *= 0.8f;
         _player.RigidCompo.drag = _player.startDrag;
 
-        if (!_player.IsSlope) StartCoroutine(ShotReadyRoutine());
+        if (_player.RigidCompo.velocity.magnitude <= _player.stopPoint && !_player.IsSlope)
+        {
+            _player.RigidCompo.velocity = Vector3.zero;
+            StartCoroutine(ShotReadyRoutine());
+        }
     }
 
     private IEnumerator ShotReadyRoutine()
@@ -59,15 +63,14 @@ public class BallPhysics : MonoBehaviour, IPlayerComponent
         {
             yield return new WaitForSeconds(0.1f);
 
-            if (_player.RigidCompo.velocity.magnitude >= _player.stopPoint)
+            if (_player.RigidCompo.velocity.magnitude > _player.stopPoint)
                 yield break;
         }
 
-        if (_player.RigidCompo.velocity == Vector3.zero)
+        if (_player.RigidCompo.velocity.magnitude <= _player.stopPoint)
         {
-            if (_isSet) OnShootEndEvent?.Invoke();
-
-            if (_ballShooting.stroke > 12 && _isSet)
+            OnShootEndEvent?.Invoke();
+            if (_ballShooting.stroke > 12)
                 _checkGole.OnGole(true);
 
             _isSet = false;

@@ -60,6 +60,8 @@ public class HoleManager : MonoBehaviour
             return;
         }
 
+        _stageManager.player.ResetPhysics();
+
         _stageManager.strokes[_currentHole - 1] = stroke;
 
         StartCoroutine(HoleInitRoutine());
@@ -67,13 +69,19 @@ public class HoleManager : MonoBehaviour
 
     public void InitializeStage(int hole)
     {
-        if (hole != 1)
+        if (hole > 1)
+        {
             _stageManager.player.RigidCompo.interpolation = RigidbodyInterpolation.None;
+        }
 
-        _stageManager.player.transform.position = nextPos;
+        _stageManager.player.ResetPhysics();
         _stageManager.player.IsGole = false;
         _stageManager.player.ballPoints.Clear();
         OnStageInitEvent?.Invoke();
+
+        _stageManager.player.transform.position = _stageManager.map[_currentHole - 1]
+                            .transform.Find("End")
+                            .transform.Find("StartPos").position; ;
     }
 
     private IEnumerator HoleInitRoutine()
