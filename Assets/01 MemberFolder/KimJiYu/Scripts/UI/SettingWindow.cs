@@ -48,11 +48,31 @@ public class SettingWindow : MonoBehaviour
 
     private void Update()
     {
+
+        Debug.Log(Time.timeScale);
+        if (_playerSetting != null)
+        {
+            if (!_isMoving)
+            {
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    if (!_isMove && !_playerSetting.IsRelease)
+                    {
+                        PanelDownButton();
+                    }
+                    else if (_isMove)
+                    {
+                        PanelUpButton();
+                    }
+                }
+            }
+        }
+
         if (!_isMoving)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                if (!_isMove && !_playerSetting.IsRelease)
+                if (!_isMove)
                 {
                     PanelDownButton();
                 }
@@ -86,7 +106,7 @@ public class SettingWindow : MonoBehaviour
         }
         _dontClick.SetActive(true);
         sequence = DOTween.Sequence();
-        sequence.Append(_settingPanel.rectTransform.DOLocalMoveY(0, 1.2f).SetEase(Ease.OutBack));
+        sequence.Append(_settingPanel.rectTransform.DOLocalMoveY(0, 1.2f));
         sequence.AppendCallback(() => Time.timeScale = 0);
         sequence.AppendCallback(() => _isMove = true);
         sequence.OnComplete(() => _isMoving = false);
@@ -118,19 +138,32 @@ public class SettingWindow : MonoBehaviour
 
     public void PanelUpButton()
     {
-        if (_isMove)
-            UpPanel();
+        if (!_isMoving)
+        {
+            if (_isMove)
+                UpPanel();
+
+        }
     }
 
     public void PanelDownButton()
     {
-        if(!_isMove)
-            DownPanel();
+        if (!_isMoving)
+        {
+            if (!_isMove)
+                DownPanel();
+        }
+        
     }
 
     public void returnTitle()
     {
-        Time.timeScale = 1;
-        SceneManager.LoadSceneAsync(0);
+        if (!_isMoving)
+        {
+            Time.timeScale = 1;
+            SceneManager.LoadSceneAsync(0);
+        }
+            
+       
     }
 }

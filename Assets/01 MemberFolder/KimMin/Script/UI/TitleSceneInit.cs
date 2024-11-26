@@ -16,8 +16,13 @@ public class TitleSceneInit : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+    }
+
+    private void Update()
+    {
     }
 
     private void OnEnable()
