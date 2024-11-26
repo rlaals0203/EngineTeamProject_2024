@@ -1,38 +1,42 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ThirdPersonCamera : MonoBehaviour
 {
-    [Header("Setting")]
-    public Transform oriantation;
-    public Transform player;
-    public Transform playerObj;
-    public Rigidbody rigid;
+    private CinemachineFreeLook _freeLook;
 
-    public float rotationSpeed;
+    [SerializeField] private float _stregth, _max, _min;
 
     private void Start()
     {
+        _freeLook = GetComponent<CinemachineFreeLook>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
     private void Update()
     {
-        Vector3 viewDir = player.position - new Vector3
-            (transform.position.x, player.position.y, transform.position.z);
+        GetMiddleDelta();
+    }
 
-        oriantation.forward = viewDir.normalized;
+    private void GetMiddleDelta()
+    {
+        float delta = Mouse.current.scroll.value.y;
 
-        float xInput = Input.GetAxis("Horizontal");
-        float yInput = Input.GetAxis("Vertical");
+        if (delta != 0)
+            AdjustCameraZoom(delta / 100);
+    }
 
-        Vector3 inputDir = oriantation.forward * yInput + oriantation.right * xInput;
-
-        if (inputDir != Vector3.zero)
+    private void AdjustCameraZoom(float scrollInput)
+    {
+        for (int i = 0; i < _freeLook.m_Orbits.Length; i++)
         {
-            playerObj.forward = Vector3.Slerp(playerObj.forward, inputDir, rotationSpeed * Time.deltaTime);
+            // 각 Orbit의 반지름을 마우스 휠 입력에 따라 조정
+            _freeLook.m_Orbits[i].m_Radius = Mathf.Clamp(
+                _freeLook.m_Orbits[i].m_Radius - scrollInput * _stregth, _min, _max);
         }
     }
 }
