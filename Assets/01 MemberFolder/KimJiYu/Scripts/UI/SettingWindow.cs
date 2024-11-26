@@ -22,6 +22,10 @@ public class SettingWindow : MonoBehaviour
 
     private void Awake()
     {
+        _player = GameObject.Find("Player");
+        if( _player != null )
+            _playerSetting = _player.GetComponent<Player>();
+
         _camera = GameObject.Find("BallCamera");
         if (_camera != null)
             _freeLook = _camera.GetComponent<CinemachineFreeLook>();
@@ -58,11 +62,13 @@ public class SettingWindow : MonoBehaviour
         {
             _freeLook.enabled = false;
             Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
 
         if (_playerSetting != null)
         {
             _playerSetting.CanShot = false;
+            _playerSetting.IsRelease = false;
         }
         _dontClick.SetActive(true);
         sequence = DOTween.Sequence();
@@ -73,12 +79,6 @@ public class SettingWindow : MonoBehaviour
 
     private void UpPanel()
     {
-        if (_camera != null)
-        {
-            _freeLook.enabled = true;
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-
         if (_playerSetting != null)
         {
             _playerSetting.CanShot = false;
@@ -88,6 +88,15 @@ public class SettingWindow : MonoBehaviour
         sequence.Append(_settingPanel.rectTransform.DOMoveY(_oldPosition, 1));
         sequence.AppendCallback(() => _isMove = false);
         sequence.AppendCallback(() => _dontClick.SetActive(false));
+        sequence.AppendCallback(() => 
+        { 
+            if (_camera != null)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                _freeLook.enabled = true;
+            }
+        });
     }
 
     public void PanelUpButton()
