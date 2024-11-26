@@ -11,7 +11,7 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
 {
     public event Action OnShootEvent;
 
-    [SerializeField] private float _powerSensivity = 20f;
+    [SerializeField] private float _powerSensivity = 27.5f;
     [Range(0, 100f)] public float shootPower;
 
     private Player _player;
@@ -20,8 +20,8 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
     public int stroke = 0;
     public int ballPointCnt = 0;
 
-    private bool _isHold;
-    private bool _isCancel;
+    public bool isHold;
+    public bool isCancel;
 
     private float _prevSensivity;
 
@@ -38,17 +38,17 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
 
     private void Update()
     {
-        if(_isHold && _player.CanShot && !_player.IsGole) Release();
+        if(isHold && _player.CanShot && !_player.IsGole) Release();
 
         if (Mouse.current.leftButton.isPressed)
         {
-            if (!_isCancel)
-                _isHold = true;
+            if (!isCancel)
+                isHold = true;
         }
         else
-            _isHold = false;
+            isHold = false;
 
-        if (Mouse.current.leftButton.wasReleasedThisFrame) _isCancel = false;
+        if (Mouse.current.leftButton.wasReleasedThisFrame) isCancel = false;
     }
 
     private void Release() //꾹 누르고 있을때
@@ -81,13 +81,15 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
         shootPower = 0;
         _player.IsRelease = false;
 
-        _isHold = false;
-        _isCancel = true;
+        isHold = false;
+        isCancel = true;
     }
 
     private void Shooting() //카메라가 플레이어 바라보는 방향으로 슛
     {
-        _isHold = false;
+        if (isCancel) return;
+
+        isHold = false;
 
         Vector3 fixedPos = new Vector3
             (_cam.position.x, _player.transform.position.y, _cam.position.z);
