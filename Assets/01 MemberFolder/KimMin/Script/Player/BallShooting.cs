@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -12,7 +13,7 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
     public event Action OnShootEvent;
 
     [SerializeField] private float _powerSensivity = 27.5f;
-    [Range(0, 100f)] public float shootPower;
+    [Range(0, 100f)] public float shootPower = 1;
 
     private Player _player;
     private Transform _cam;
@@ -66,7 +67,7 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
 
         _player.IsRelease = true;
 
-        if (Mouse.current.leftButton.wasReleasedThisFrame)
+        if (Mouse.current.leftButton.wasReleasedThisFrame && isHold)
         {
             Shooting();
         }
@@ -78,7 +79,7 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
 
     public void CancelShooting() //Ω∏ √Îº“
     {
-        shootPower = 0;
+        shootPower = 1;
         _player.IsRelease = false;
 
         isHold = false;
@@ -107,7 +108,7 @@ public class BallShooting : MonoBehaviour, IPlayerComponent
 
         ballPointCnt++;
         stroke++;
-        shootPower = 0;
+        shootPower = 1;
         OnShootEvent?.Invoke();
         SFXSoundManager.instance.OnShotClip?.Invoke();
     }
