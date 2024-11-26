@@ -1,10 +1,8 @@
-using Cinemachine;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using TMPro;
 using UnityEngine;
+using System.IO;
 
 public class HoleManager : MonoBehaviour
 {
@@ -16,6 +14,8 @@ public class HoleManager : MonoBehaviour
     public CheckGole _checkGole;
     public StageManager _stageManager;
     private Rigidbody _rigid;
+
+    private readonly string _path = Path.Combine(Application.persistentDataPath, "gameData.txt");
 
     private Vector3 nextPos;
 
@@ -99,10 +99,18 @@ public class HoleManager : MonoBehaviour
         _stageManager.strokes.ToList().ForEach(x => _stageManager.totalStroke += x);
         _stageManager.holeTime.ToList().ForEach(x => _stageManager.totalTime += x);
 
+        using (StreamWriter sw = new StreamWriter(File.Open(@"aaa.txt",FileMode.OpenOrCreate)))
+        {
+            sw.WriteLine(_stageManager.totalStroke);
+            sw.WriteLine(_stageManager.totalTime);
+            sw.Close();
+        }
+
         _stageManager.stageDataSO.totalStroke = _stageManager.totalStroke;
         _stageManager.stageDataSO.totalTime = Mathf.RoundToInt(_stageManager.totalTime);
 
         yield return new WaitForSeconds(timeToReady);
         OnGameEndEvent?.Invoke();
     }
+
 }

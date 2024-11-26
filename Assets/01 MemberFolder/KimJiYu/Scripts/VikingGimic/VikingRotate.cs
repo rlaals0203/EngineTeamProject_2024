@@ -5,7 +5,6 @@ using DG.Tweening;
 
 public class VikingRotate : MonoBehaviour
 {
-    [SerializeField] private float _interval = 0.3f;
     [SerializeField] private float _swingTime = 1;
 
     private Sequence _rotateSequence;

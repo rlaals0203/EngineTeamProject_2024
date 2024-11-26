@@ -131,7 +131,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bgPanel: {fileID: 1337316892109666131}
   _dontClick: {fileID: 8916518690978611358}
-  _setting: 0
 --- !u!1 &1922519914130208859
 GameObject:
   m_ObjectHideFlags: 0
@@ -2072,7 +2071,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.36862746}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

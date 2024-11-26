@@ -954,7 +954,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uD29C\uD1A0\uB9AC\uC5BC"
+  m_text: "\uC124\uC815"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8283978deea65a442a79f0aa223a893e, type: 2}
   m_sharedMaterial: {fileID: -1856520794273035101, guid: 8283978deea65a442a79f0aa223a893e,
@@ -1761,7 +1761,7 @@ GameObject:
   - component: {fileID: 1774867830}
   - component: {fileID: 1774867833}
   m_Layer: 5
-  m_Name: TutorialBtn
+  m_Name: SettingBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2133,11 +2133,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Setting
       objectReference: {fileID: 0}
-    - target: {fileID: 8346673213587488294, guid: 05e1f72dd331b1e4e8a7a9e7eea60872,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8458695973912959121, guid: 05e1f72dd331b1e4e8a7a9e7eea60872,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -2152,11 +2147,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMin.x
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8916518690978611358, guid: 05e1f72dd331b1e4e8a7a9e7eea60872,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

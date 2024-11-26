@@ -10,8 +10,6 @@ public enum StageEnum
 
 public class StageManager : MonoBehaviour
 {
-    public event Action OnMapSelectEvent;
-
     [HideInInspector] public GameObject[] map;
     public GameObject mapParent;
     public Player player;
