@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class TitleSceneInit : MonoBehaviour
 {
@@ -10,13 +11,39 @@ public class TitleSceneInit : MonoBehaviour
 
     private void Awake()
     {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        DOTween.Init(this);
     }
 
     private void Start()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "Title") // 특정 씬 이름 확인
+        {
+            MoveElement();
+        }
+    }
+
+    private void MoveElement()
+    {
+        _seq?.Kill();
+
         _seq = DOTween.Sequence();
-        _seq.Append(_element.transform.DOLocalMoveY(0, 2f).SetEase(Ease.InOutBack));
+        _seq.Append(_element.transform.DOLocalMoveY(0, 2f).SetEase(Ease.OutBack))
+            .AppendCallback(() => Debug.Log("dododo"));
     }
 }
