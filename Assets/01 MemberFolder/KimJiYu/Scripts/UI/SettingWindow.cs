@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class SettingWindow : MonoBehaviour
 {
+    public static SettingWindow Instance;
+
     [SerializeField] private GameObject _bgPanel;
     [SerializeField] private GameObject _dontClick;
 
@@ -17,13 +19,20 @@ public class SettingWindow : MonoBehaviour
     private BallShooting _ballShooting;
 
     private bool _isMove = false;
-    private bool _isMoving = false;
+    public bool _isMoving = false;
     private float _oldPosition;
 
     private Sequence sequence;
 
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+            Destroy(Instance);
+
         _player = GameObject.Find("Player");
         if( _player != null )
             _playerSetting = _player.GetComponent<Player>();
@@ -87,6 +96,8 @@ public class SettingWindow : MonoBehaviour
 
     private void DownPanel()
     {
+        sequence = DOTween.Sequence();
+        sequence.SetUpdate(true);
         _isMoving = true;
 
         if (_camera != null)
@@ -104,10 +115,9 @@ public class SettingWindow : MonoBehaviour
             _playerSetting.CanShot = false;
             _ballShooting.CancelShooting();
         }
+        Time.timeScale = 0;
         _dontClick.SetActive(true);
-        sequence = DOTween.Sequence();
         sequence.Append(_settingPanel.rectTransform.DOLocalMoveY(0, 1.2f));
-        sequence.AppendCallback(() => Time.timeScale = 0);
         sequence.AppendCallback(() => _isMove = true);
         sequence.OnComplete(() => _isMoving = false);
     }

@@ -5,37 +5,34 @@ using UnityEngine.UI;
 
 public class GetSoundValue : MonoBehaviour
 {
-    [SerializeField] private bool _bgm;
+    [SerializeField] private bool _bgm; // true: BGM, false: SFX
 
     private Slider _slider;
-    private GameObject _value;
     private AudioSource _audioSound;
+    private string _prefKey;
+    private string _managerName;
 
     private void Awake()
     {
-        if (_bgm)
-        {
-            _value = GameObject.Find("BGSoundManager");
-            if (_value != null)
-                Debug.Log("BG사운드 찾음");
-            _audioSound = _value.GetComponent<AudioSource>();
-        }
+        _managerName = _bgm ? "BGSoundManager" : "SFXSoundManager";
+        _prefKey = _bgm ? "bgmVolume" : "sfxVolume";
 
-        else if (!_bgm)
-        {
-            _value = GameObject.Find("SFXSoundManager");
-            if (_value != null)
-                Debug.Log("SFX사운드 찾음");
-            _audioSound = _value.GetComponent<AudioSource>();
-        }
-            _slider = GetComponent<Slider>();
+        GameObject manager = GameObject.Find(_managerName);
+        _audioSound = manager.GetComponent<AudioSource>();
+
+        _slider = GetComponent<Slider>();
     }
 
     private void Start()
     {
-        if(_value != null)
-            _slider.value = _audioSound.volume;
+        float savedVolume = PlayerPrefs.GetFloat(_prefKey);
+        _audioSound.volume = savedVolume;
+        _slider.value = savedVolume;
     }
 
-
+    public void ChangeValue()
+    {
+        _audioSound.volume = _slider.value;
+        PlayerPrefs.SetFloat(_prefKey, _slider.value);
+    }
 }

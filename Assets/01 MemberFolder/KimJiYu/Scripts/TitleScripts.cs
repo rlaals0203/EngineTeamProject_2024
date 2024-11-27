@@ -7,7 +7,8 @@ public class TitleScripts : MonoBehaviour
 {
     public void StartGame()
     {
-        SceneManager.LoadScene("Forest");
+        if(!SettingWindow.Instance._isMoving)
+            SceneManager.LoadScene("Forest");
     }
 
     public void SettingPanel()
@@ -17,6 +18,7 @@ public class TitleScripts : MonoBehaviour
 
     public void ExitGame()
     {
-        Application.Quit();
+        if (!SettingWindow.Instance._isMoving)
+            Application.Quit();
     }
 }

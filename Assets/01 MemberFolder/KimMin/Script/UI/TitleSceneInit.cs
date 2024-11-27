@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using UnityEngine.SceneManagement;
 
 public class TitleSceneInit : MonoBehaviour
 {
@@ -11,7 +8,6 @@ public class TitleSceneInit : MonoBehaviour
 
     private void Awake()
     {
-        DOTween.Init(this);
     }
 
     private void Start()
@@ -19,35 +15,16 @@ public class TitleSceneInit : MonoBehaviour
         Time.timeScale = 1;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-    }
 
-    private void Update()
-    {
-    }
-
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (scene.name == "Title") // 특정 씬 이름 확인
-        {
-            MoveElement();
-        }
+        MoveElement();
     }
 
     private void MoveElement()
     {
-        _seq?.Kill();
+        SettingWindow.Instance._isMoving = true;
 
         _seq = DOTween.Sequence();
         _seq.Append(_element.transform.DOLocalMoveY(0, 2f).SetEase(Ease.OutBack));
+        _seq.OnComplete(() => SettingWindow.Instance._isMoving = false);
     }
 }
