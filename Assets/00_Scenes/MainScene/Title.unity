@@ -536,7 +536,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -1603,8 +1603,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 523574177}
-  - {fileID: 1936561432}
   - {fileID: 854044055}
+  - {fileID: 1936561432}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1679,6 +1679,24 @@ MonoBehaviour:
   _stroke: {fileID: 2089740008}
   _time: {fileID: 1741298755}
   _dateTime: {fileID: 1267844035}
+--- !u!1 &895564216 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6333002603587401747, guid: 05e1f72dd331b1e4e8a7a9e7eea60872,
+    type: 3}
+  m_PrefabInstance: {fileID: 1931071038453970473}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &895564221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895564216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4241a9903c2cc743b0d09973e99cf76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &930558808
 GameObject:
   m_ObjectHideFlags: 0
@@ -1716,6 +1734,24 @@ RectTransform:
   m_AnchoredPosition: {x: -250, y: -50}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &943760474 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5765620898537944550, guid: 05e1f72dd331b1e4e8a7a9e7eea60872,
+    type: 3}
+  m_PrefabInstance: {fileID: 1931071038453970473}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &943760479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943760474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4241a9903c2cc743b0d09973e99cf76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &955500290
 GameObject:
   m_ObjectHideFlags: 0
@@ -3689,7 +3725,15 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5765620898537944550, guid: 05e1f72dd331b1e4e8a7a9e7eea60872,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 943760479}
+    - targetCorrespondingSourceObject: {fileID: 6333002603587401747, guid: 05e1f72dd331b1e4e8a7a9e7eea60872,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 895564221}
   m_SourcePrefab: {fileID: 100100000, guid: 05e1f72dd331b1e4e8a7a9e7eea60872, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
