@@ -42,7 +42,7 @@ public class GameEndUI : MonoBehaviour
         seq = DOTween.Sequence();
 
         _strokeTxt.text = $"타수\n{stageDataSO.totalStroke}";
-        _timeTxt.text = $"플레이 시간\n{stageDataSO.totalTime}";
+        _timeTxt.text = $"플레이 시간\n{stageDataSO.totalTime}초";
 
         _hioTxt.text = stageDataSO.stageManager.strokeNameDic[GoleEnum.HOLE_IN_ONE].ToString();
         _condorTxt.text = stageDataSO.stageManager.strokeNameDic[GoleEnum.CONDOR].ToString();
