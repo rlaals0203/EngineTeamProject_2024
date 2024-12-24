@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class SFXSoundManager : MonoBehaviour
 {
@@ -35,6 +37,27 @@ public class SFXSoundManager : MonoBehaviour
         OnAlbatrosClip += AlbatrosSound;
         OnGoleClip += GoleSound;
         OnShotClip += ShotSound;
+    }
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+    private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
+    {
+        if (_sfxVolumeSlider == null)
+        {
+            _sfxVolumeSlider = GameObject.Find("SfxSlider").GetComponent<Slider>();
+            if (_sfxVolumeSlider != null)
+            {
+                _sfxVolumeSlider.value = PlayerPrefs.GetFloat("sfxVolume", 1f);
+                _sfxVolumeSlider.onValueChanged.AddListener(delegate { SfxChangeVolume(); });
+            }
+        }
     }
 
     private void Start()
