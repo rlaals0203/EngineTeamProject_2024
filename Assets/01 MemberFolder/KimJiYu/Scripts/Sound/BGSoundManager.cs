@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class BGSoundManager : MonoBehaviour
@@ -23,6 +24,28 @@ public class BGSoundManager : MonoBehaviour
         }
 
         _audioSource = GetComponent<AudioSource>();
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+    private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
+    {
+        if (_bgmVolumeSlider == null)
+        {
+            _bgmVolumeSlider = GameObject.Find("BgmSlider").GetComponent<Slider>();
+            if (_bgmVolumeSlider != null)
+            {
+                _bgmVolumeSlider.value = PlayerPrefs.GetFloat("sfxVolume", 1f);
+                _bgmVolumeSlider.onValueChanged.AddListener(delegate { BgmChangeVolume(); });
+            }
+        }
     }
 
     private void Start()
